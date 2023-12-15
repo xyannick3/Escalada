@@ -13,7 +13,7 @@
         <tr>
             <th>nom</th>
             <th>longueur de l'ascention</th>
-            <th>difficulté</th>
+            <th><a>difficulté</th>
         </tr>
     </thread>
     <tbody>
@@ -21,7 +21,7 @@
             <tr>
                 <td>{{item["nom"]}}</td>
                 <td>{{item["longueur"]}}</td>
-                <td>{{item["fr"]}}</td>
+                <td><div onclick = "location.href='{{url_for("difficultés", select=item["fr"])}}';">{{item["fr"]}}</div></td>
             </tr>
         {%endfor%}
     </tbody>

@@ -18,12 +18,22 @@
     </thread>
     <tbody>
         {% for item in content%}
-            <tr>
-                <td>{{item["fr"]}}</td>
-                <td>{{item["am"]}}</td>
-                <td>{{item["en"]}}</td>
-            </tr>
-        {%endfor%}
+        {%if item["fr"]==select%} 
+        <script>window.onload = function(){(console.log('{{item}}'))}</script>
+        <tr style="background-color: yellow;">
+            <td>{{item["fr"]}}</td>
+            <td>{{item["am"]}}</td>
+            <td>{{item["en"]}}</td>
+        </tr>
+        
+        {%else%}
+        <tr>
+            <td>{{item["fr"]}}</td>
+            <td>{{item["am"]}}</td>
+            <td>{{item["en"]}}</td>
+        </tr>
+        {%endif%}
+            {%endfor%}
     </tbody>
 </table>
 {%endblock%}

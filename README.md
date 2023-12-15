@@ -24,4 +24,9 @@ normalement la database est initialisée :).
 2. Todo list : 
 
 * ~~initialiser le github~~
+
+
+* ~~Lier la difficulté des voie à la table difficulté.~~
+
+
 * Remplir la todo list :)

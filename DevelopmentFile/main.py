@@ -32,6 +32,14 @@ def load_user(id) :
     return User.query.get(str(id))
 
 
+@app.route("/difficulté/<select>")
+def difficultés(select) : 
+    with db.connect() as conn :
+        with conn.cursor(cursor_factory=psycopg2.extras.NamedTupleCursor) as cur:
+            cur.execute("select * from difficulte;")
+            result=cur.fetchall()
+    return render_template("difficultés.html",content=result,ses=session,select=str(select))
+
 @app.route("/difficulté")
 def difficulté():
     
@@ -40,7 +48,7 @@ def difficulté():
             cur.execute("select * from difficulte;")
             result=cur.fetchall()
 
-    return render_template("difficultés.html",content=result,ses=session)
+    return render_template("difficultés.html",content=result,ses=session,select='0')
 
 @app.route("/sites")
 def sites() :
