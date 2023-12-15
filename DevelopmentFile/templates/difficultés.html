@@ -1,0 +1,29 @@
+{%extends "base.html"%}
+{%block pagetitle%}page test{%endblock%}
+
+{%block title%}
+<h1 style="text-align: center;">Page de difficultés</h1>
+<h2 style ="text-align: center;">Internationale.</h2>
+{%endblock%}
+
+{%block content%}
+<h2>Voici la table des difficultés</h2>
+<table>
+    <thread>
+        <tr>
+            <th>Français</th>
+            <th>Americain</th>
+            <th>Anglais</th>
+        </tr>
+    </thread>
+    <tbody>
+        {% for item in content%}
+            <tr>
+                <td>{{item["fr"]}}</td>
+                <td>{{item["am"]}}</td>
+                <td>{{item["en"]}}</td>
+            </tr>
+        {%endfor%}
+    </tbody>
+</table>
+{%endblock%}

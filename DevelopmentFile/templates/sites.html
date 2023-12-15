@@ -1,0 +1,28 @@
+{%extends "base.html"%}
+{%block pagetitle%}page test{%endblock%}
+
+{%block title%}
+<h1 style="text-align: center;">Pages des sites</h1>
+<h2 style ="text-align: center;">de France</h2>
+{%endblock%}
+
+{%block content%}
+<h2>Voici la liste des sites disponibles</h2>
+<table>
+    <thread>
+        <tr>
+            <th>nom</th>
+            <th>codepostal</th>
+        </tr>
+    </thread>
+    <tbody>
+        {% for item in content%}
+            <tr>
+                <td><a href={{url_for("site", select=item["idse"])}}>{{item["nom"]}}</a></td>
+                
+                <td>{{item["codepostal"]}}</td>
+            </tr>
+        {%endfor%}
+    </tbody>
+</table>
+{%endblock%}

@@ -1,0 +1,24 @@
+{%extends "base.html"%}
+{%block pagetitle%}test get method{%endblock%}
+{%block title%}<h1>Tableau des cordées ! </h1>{%endblock%}
+
+{%block content%}
+<h2> Voici la liste des cordées </h2>
+<table>
+    <thread>
+        <tr>
+            <th>Cordées</th>
+        </tr>
+    </thread>
+    <tbody>
+        {%for item in content%}
+            <tr>
+                <td>
+                    
+                    <a href={{url_for("cordeeselect", select=item["idcordee"])}}>{{item["nomcordee"]}}</a>
+                </td>
+            </tr>
+        {%endfor%}
+    </tbody>
+</table>
+{%endblock%}

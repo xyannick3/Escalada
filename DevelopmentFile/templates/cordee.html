@@ -1,0 +1,24 @@
+{%extends "base.html"%}
+{%block pagetitle%}test get method{%endblock%}
+{%block title%}<h1> Cordee : {{cordee["nomcordee"]}} </h1>{%endblock%}
+
+{%block content%}
+<h2> Voici la liste des cordées </h2>
+<table>
+    <thread>
+        <tr>
+            <th>{{cordee["nomcordee"]}}</th>
+        </tr>
+    </thread>
+    <tbody>
+        {%for item in content%}
+            <tr>
+                <td>
+                    
+                    <a href={{url_for("user", select=item[0])}}>{{item[1]}}</a>
+                </td>
+            </tr>
+        {%endfor%}
+    </tbody>
+</table>
+{%endblock%}

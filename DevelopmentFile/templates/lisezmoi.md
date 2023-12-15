@@ -1,0 +1,1 @@
+Il serait intéressant de garder les fichiers originaux de développement amême si on ne les utilise pas pour aider au debuggage.

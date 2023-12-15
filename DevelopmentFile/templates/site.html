@@ -1,0 +1,29 @@
+{%extends "base.html"%}
+{%block pagetitle%}page test{%endblock%}
+
+{%block title%}
+<h1 style="text-align: center;">Pages des sites</h1>
+<h2 style ="text-align: center;">de France</h2>
+{%endblock%}
+
+{%block content%}
+<h2>Voici la liste des voies disponibles</h2>
+<table>
+    <thread>
+        <tr>
+            <th>nom</th>
+            <th>longueur de l'ascention</th>
+            <th>difficulté</th>
+        </tr>
+    </thread>
+    <tbody>
+        {% for item in content%}
+            <tr>
+                <td>{{item["nom"]}}</td>
+                <td>{{item["longueur"]}}</td>
+                <td>{{item["fr"]}}</td>
+            </tr>
+        {%endfor%}
+    </tbody>
+</table>
+{%endblock%}

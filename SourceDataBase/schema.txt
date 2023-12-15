@@ -1,0 +1,109 @@
+TypeVoie(IdTV,nom,description)
+primary key : IdTV
+IdTV serial
+nom varchar(25)
+description varchar(999)
+
+Voie(IdV,nom,longueur,IdTV,FR,IdSE)
+primary key : IdV
+foreign key : IdTV de TypeVoie, FR de difficulté, IdSE de SiteEsca
+IdV serial,
+IdTV integer,
+FR varchar(2),
+IdSE integer,
+
+
+DeboucheVers(IdV1,IdV2)
+Primary key : (IdV)
+foreign key : IdV1 et IdV2 qui sont des clés différentes IdV de Voie
+IdV1 integer;
+IdV2 interger;
+
+
+TypeEsca(IdTE,nom,description)
+Primary key :IdTE
+IdTe integer,
+nom varchar(25),
+description varchar(999),
+
+
+Cordée(IdCordée)
+Primary key : IdCordée
+idCordée integer,
+
+
+Grimper(IdTE,IdCordée,IdV,date)
+Primary key : (IdTE,IdCordée,IdV,date)
+Foreign key : IdTe de TypeEsca, IdCordée de Cordée, IdV de Voie
+IdTE integer,
+IdCordée integer,
+IdV integer,
+dateg date,
+*
+
+Difficulté(FR, AM, EN)
+Primary Key : FR
+FR varchar(2),
+AM varchar(5),
+EN varchar(4),
+
+Utilisateur(mail,mdp,nom,prenom,FR)
+Primary Key : mail
+foreign Key : FR de difficulté
+mail varchar(320),
+mdp varchar(25),
+nom varchar(25),
+prenom varchar(25),
+fr varchar(2)
+
+
+PartieC(idCordée,mail)  j'ai rajouté ça comme correction, ce que la prof a demandé
+Primary Key : (idCordée,mail)
+Foreign key : idCordée de Cordée, mail de Utilisateur
+idcordée integer,
+mail varchar(320)
+mdp varchar(25)
+
+
+Proposition(IdPropo,description,date,nb_max,mail,FR,IdSE)
+Primary Key : IdPropo
+Foreign key : mail de l'utilisateur qui organise, FR de Difficulté, IdSE de SiteEsca
+Idpropo integer,
+description varchar(999),
+nb_max integer,
+mail varchar(320),
+fr varchar(2),
+idse integer,
+contrainte nb_max doit être positif.
+
+
+
+Participe(mail,IdPropo)
+Primary Key : (mail,IdPropo)
+Foreign Key : mail d'utilisateur, IdPropo de Proposition.
+mail varchar(320),
+Idpropo integer,
+
+
+Localite(CodePostal,nom)
+Primary Key : CodePostal
+Codepostal varchar(5)
+nom varchar(45), 
+// Saint-Remy-en-Bouzemont-Saint-Genest-et-Isson est le 
+// plus long nom de commune de France avec 45 charactère
+
+
+EstGuideDe(mail,CodePostal)
+Primary Key : (mail,CodePostal)
+Foreign Key : mail d'utilisateur, CodePostal de Localite
+mail varchar (320)
+Codepostal varchar(5)
+
+
+SiteEsca(IdSE,nom,CodePostal)
+Primary Key : IdSE
+Foreign Key : CodePostal de Localite
+IdSE serial,
+nom varchar(45),
+Codepostal varchar(5)
+
