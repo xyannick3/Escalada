@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, session, flash
+from flask import Flask, render_template, request, redirect, url_for, session, flash, abort
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 import secrets 
 import psycopg2.extras
@@ -185,12 +185,42 @@ def cordeeselect(select) :
 def user(select) :
     if 'mail' not in session :
         return redirect('login')
-    with db.connect() as conn : 
-        with conn.cursor(cursor_factory=psycopg2.extras.NamedTupleCursor) as cur : 
-            cur.execute("select * from utilisateur where mail=%s", (select,))
-            result=cur.fetchall()
-            result=result[0]
+    
 
-    return render_template("user.html",content=result)
+    with db.connect() as conn : 
+        with conn.cursor() as cur : 
+            cur.execute("select mail from utilisateur where mail=%s", (select,))
+            result=cur.fetchall()
+            
+            print(result)
+    if not result :
+        abort(404)
+    with db.connect() as conn : 
+            with conn.cursor(cursor_factory=psycopg2.extras.NamedTupleCursor) as cur: 
+                cur.execute('select * from utilisateur where mail=%s', (select,))
+                result=cur.fetchall()
+                cur.execute('select * from estguidede where mail=%s', (select,))
+                guide=cur.fetchall()
+                cur.execute('select * from partiec where mail=%s', (select,))
+                cordee=cur.fetchall()
+                lst=[]
+                for elem in cordee : 
+                    cur.execute('select * from cordee where idcordee = %s', (elem[0],))
+                    lst.append(cur.fetchall())
+                
+    for elem in lst : 
+        print(f"test : {elem[0]}")
+    lst=[1,2,3,4]
+    if session['mail']!=select :
+        return render_template('user.html',content=result[0],guide=guide,cordee=cordee,lst=lst)
+    
+
+    return render_template('userselected.html',content=result[0],guide=guide)  
+    
+
+
+@app.errorhandler(404)
+def page_not_found(error) : 
+    return render_template('404.html'), 404
 if __name__ == "__main__" :
     app.run()

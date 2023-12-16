@@ -27,36 +27,37 @@ INSERT INTO localite VALUES ('13009','Marseille 9eme arroundissement');
 INSERT INTO localite VALUES ('42920','Chalmazel');
 
 
-INSERT INTO utilisateur VALUES ('leroux.leo32@yahoo.fr','$2b$12$qWWjsfYGgIBd9tTYUFa5w.9N0ccjsiHZ5miSon16h.OrmzVhIb8..','leroux','leo','9c');
-INSERT INTO utilisateur VALUES ('guerin.oceane30@live.com','$2b$12$Rly3TJsiPm1Vb/INbEK7feA3aN.Bfby3uoVeQi0EArP/lom3L0/sa','guerin','oceane','9b');
-INSERT INTO utilisateur VALUES ('noah67@hotmail.com','$2b$12$6rvRrfdsPm1sIEel/OQUruUCcLaZ8TsY9eAOPpKeHgjg0bRd9/mAa','guerin','noah','5a');
-INSERT INTO utilisateur VALUES ('adam74@laposte.net','$2b$12$okEobfm9R8UnfI8h8lpq9uIVpWtZeLSaELz0U5VHei3I5KmeQvkZO','laurent','adam','8b');
-INSERT INTO utilisateur VALUES ('perez.leo38@live.com','$2b$12$xxtVvM7qvrDH/VG7SdT/.uD61/pKsPSPd/wtBO75OGuPFY6jYlykC','perez','leo','2');
-INSERT INTO utilisateur VALUES ('noah55@hotmail.com','$2b$12$eATN85UeLxm0OBw34DAkkOvi6Pmnh71LUPLwFFCnRnIW754yjHl12','langlois','noah','7b');
-INSERT INTO utilisateur VALUES ('moreau.lucas35@gmail.com','$2b$12$zndHNBS3Wn6UjD8DJpIWcOXKVgRVyjbxowrZEBaDHxzLp7EJrM38.','moreau','lucas','5b');
-INSERT INTO utilisateur VALUES ('blanc.jade72@yahoo.fr','$2b$12$.3szFD6B.coyUWHOHvKKV.zCIhk3XWimML1AvaSL9o3pzIXjs.5UO','blanc','jade','2');
-INSERT INTO utilisateur VALUES ('dupuy.adam28@live.com','$2b$12$H.yeGik7WYXKfhbhyPGTouvJFvqNVLanOHJL59FTlimGwWgtwYeN6','dupuy','adam','7c');
-INSERT INTO utilisateur VALUES ('amy66@live.com','$2b$12$bF6N5g9YSV25afu9jDj5Reo6dVePVRU1hReY0JyResQBbf1G5qfnu','david','amy','9c');
-INSERT INTO utilisateur VALUES ('vincent.lucas64@gmail.com','$2b$12$O9rXdJ7bz8FIV7YVrdLbpeHcaaCA0PUn6B.rqOGK/HaS2q/dXtzAW','vincent','lucas','5b');
-INSERT INTO utilisateur VALUES ('anna54@live.com','$2b$12$auUSEOX5t.F1kDO5ztOjFOksbN0wFmEZTOklSGWlCfaUQtZ/IJhji','dupuy','anna','9b');
-INSERT INTO utilisateur VALUES ('alex57@laposte.net','$2b$12$Y70TxqiuJDGvA/Xow3Tgs.Zy6LblLYZr16wtkxjwV7GhftsTAYZ7K','lopez','alex','6c');
-INSERT INTO utilisateur VALUES ('guerin.mael93@laposte.net','$2b$12$Lt7yNYFvpHj8cYo7BQe/Qujhze1XHFmebFSWAHrK7IFfUCqqYHv.K','guerin','mael','6c');
-INSERT INTO utilisateur VALUES ('jean.amy20@laposte.net','$2b$12$Dt.FoO3mNltv5hsvl4bBd.DwguPXH34r2nDkPS13MCHiq90segSOK','jean','amy','8c');
-INSERT INTO utilisateur VALUES ('deschamps.leo8@yahoo.fr','$2b$12$XT5q2.w40gTTRZy8/S0NxuhRu4y.jPI5XHZw6teLBwUXWqfIuUkx2','deschamps','leo','8c');
-INSERT INTO utilisateur VALUES ('jean.gabriel17@yahoo.fr','$2b$12$R9UhaEjLwmz5QKks8fx/7./UXAEV2iMfVR3J/F03g9BogZuox8unO','jean','gabriel','9a');
-INSERT INTO utilisateur VALUES ('romy84@laposte.net','$2b$12$CfQnVfg2b/AdNeDR7UmowOG0xyBLuyyrmtIUWze3YqkfPLSep96jm','lopez','romy','8b');
-INSERT INTO utilisateur VALUES ('david.emma29@gmail.com','$2b$12$dzWIXFkF/0fCVeGUXUct6ui6bqKpA2bCNhcETfADEhemo95K0FZvG','david','emma','9c');
-INSERT INTO utilisateur VALUES ('simon.alex8@yahoo.fr','$2b$12$W5w9wYccUBmguqJcsXeJTuGO0bok./hFWIfcB5ALKBDGHPk7RYVN2','simon','alex','3');
-INSERT INTO utilisateur VALUES ('noah81@yahoo.fr','$2b$12$9xdfsXv0TxR3WQOUvXd2zO9p0l0sqQ8K841WHoKL6WNnl3uxGRFg.','sanchez','noah','8c');
-INSERT INTO utilisateur VALUES ('louise56@laposte.net','$2b$12$ojvoSgMpRBgpqrTjvu3qUeEi/eXry7bNiYw9GXoySVOLftnEvN7Yy','dupuy','louise','8b');
-INSERT INTO utilisateur VALUES ('oceane91@hotmail.com','$2b$12$reFxgq12ifofOSs33IxA9uLuCubwd.TxQgNT6iu7qBFeXQb5c7dM6','lopez','oceane','6a');
-INSERT INTO utilisateur VALUES ('louis58@laposte.net','$2b$12$YfsPteTrFigbHWGBcaOwLOM6IvGOaNPCS3IYZLnqQQcg4kXW/I0XC','laurent','louis','3');
-INSERT INTO utilisateur VALUES ('blanc.rose70@gmail.com','$2b$12$DqjUg5AviX5f9P/nSJ3sAOvPftQh3jdqW0.Cn7KndFOa2b/NwuexG','blanc','rose','8a');
-INSERT INTO utilisateur VALUES ('alba53@gmail.com','$2b$12$6pCVLLIaQfngPhoSW0ZmjOvp7sWgLbd8EOcb/6tJvzmhrSMi3s1Rq','garnier','alba','8b');
-INSERT INTO utilisateur VALUES ('lefevre.louise72@hotmail.com','$2b$12$GGfnZKI9WiWpkwDjQt./zerclALqzmKrnfRttVc9Xgf2wmKLW1/dK','lefevre','louise','5c');
-INSERT INTO utilisateur VALUES ('martin.alice96@laposte.net','$2b$12$4fN9ATOVs.BSsgGHIQ.jv.FycZry0si9XspfQ7arg3IWqynq.buhO','martin','alice','9a');
-INSERT INTO utilisateur VALUES ('lopez.emma11@yahoo.fr','$2b$12$X3aO/3RcdmPZQtyjW20..eLY0OUWGApegjnpqG/2XUamnJ.usaRJm','lopez','emma','7c');
-INSERT INTO utilisateur VALUES ('alice88@gmail.com','$2b$12$annL6lmSbJWQnl6gB3dFA.tNZbX68CJdCQv.Mt8P/zl1Roj.yG/K2','durand','alice','6b');
+INSERT INTO utilisateur VALUES ('leroux.leo32@yahoo.fr','$2b$12$dozHvRyw32lJODuzNBNcyuAs7zm/v3B1QH9NhdZTvBT0F95Og3aqy','leroux','leo','9c');
+INSERT INTO utilisateur VALUES ('guerin.oceane30@live.com','$2b$12$UQ5HYgfpRQWlXdjLPRM0p.4Iw1JPRSFsMtm6T.YaeVlLTtqdHQFTe','guerin','oceane','9b');
+INSERT INTO utilisateur VALUES ('noah67@hotmail.com','$2b$12$phR0ja46zCrLat/MzKHjMuVmMRQTPd6.9bBsy97PU/J5q1Q3OdVny','guerin','noah','5a');
+INSERT INTO utilisateur VALUES ('adam74@laposte.net','$2b$12$afDXGjGis1RDXh9lpbjmIeAQ1KCiGctQ4UXH3EnjEtHWMMQuHEeIW','laurent','adam','8b');
+INSERT INTO utilisateur VALUES ('perez.leo38@live.com','$2b$12$TENOBMgrdiqawFvUDsn.cOrPxgnd4dBMmE.uhFx6jJr/GcNQo90BW','perez','leo','2');
+INSERT INTO utilisateur VALUES ('noah55@hotmail.com','$2b$12$eliI0zC6EUfLzI0cRDXXyuuHsrPKNf2hlMVt/7JcXu829fiT1A18u','langlois','noah','7b');
+INSERT INTO utilisateur VALUES ('moreau.lucas35@gmail.com','$2b$12$iC.166TCHcN5Q1dvAy0gTuwgYZq/.IT8aNIT9UenXjNCET7D05Fou','moreau','lucas','5b');
+INSERT INTO utilisateur VALUES ('blanc.jade72@yahoo.fr','$2b$12$G8wlIsMETRDud1vtM1qkuO2OhNLeAyHyWqNoMyn6Gc1KWmfOncr3y','blanc','jade','2');
+INSERT INTO utilisateur VALUES ('dupuy.adam28@live.com','$2b$12$1yvyW5Y5Lwm36uc0LQKCkOS/Um6fghbaknm238L05fbatVQwkl0Le','dupuy','adam','7c');
+INSERT INTO utilisateur VALUES ('amy66@live.com','$2b$12$bCQSqJe/pr.kK8em2KusTOJu5izDZURXiSPL6P55B0U9JDknatPmm','david','amy','9c');
+INSERT INTO utilisateur VALUES ('vincent.lucas64@gmail.com','$2b$12$NTftQgys04UHC3HGUj2s/urgX64xxjUjkxXgttY/jzugLafClzXfm','vincent','lucas','5b');
+INSERT INTO utilisateur VALUES ('anna54@live.com','$2b$12$qwF840si4ssFUB54G.j2BefzXty6bHZi7DK3l.1hdkXD1Wkit7qo6','dupuy','anna','9b');
+INSERT INTO utilisateur VALUES ('alex57@laposte.net','$2b$12$Is28G8BS1XmeMC1glsb6gOr5S6JoxoTvyt9hi5.tShh8XjeehmvBG','lopez','alex','6c');
+INSERT INTO utilisateur VALUES ('guerin.mael93@laposte.net','$2b$12$EGZWJzOdEuTQMQzI/XhWAONw/mzKCM2G/iPRWP2B2fs2wWrMd0LH.','guerin','mael','6c');
+INSERT INTO utilisateur VALUES ('jean.amy20@laposte.net','$2b$12$9pha0FQ.Nd0mxAAOmD3StuiO54bepfJwGkN9RXOA0j4nSBkkGkLjK','jean','amy','8c');
+INSERT INTO utilisateur VALUES ('deschamps.leo8@yahoo.fr','$2b$12$/TmXCFVUyp1fp9PSy1BLOOZ.kLDmdNNk0EuwoPizvinCtuDWY1EB2','deschamps','leo','8c');
+INSERT INTO utilisateur VALUES ('jean.gabriel17@yahoo.fr','$2b$12$3jPc5Btns38hhmYTbJOqT.Bf7914sXAhRfbFT9NoOuE88NISUiW9m','jean','gabriel','9a');
+INSERT INTO utilisateur VALUES ('romy84@laposte.net','$2b$12$ZhKANe1QTpulmEVpV1Y/9edGj18DQ5w.C8UKCFF7nJJssMZpJ/1.u','lopez','romy','8b');
+INSERT INTO utilisateur VALUES ('david.emma29@gmail.com','$2b$12$2rM/6s77jYodQRGZJ2/eDeV7X1eTj3vDQVxvaoaba/JHL4DQ9Uji2','david','emma','9c');
+INSERT INTO utilisateur VALUES ('simon.alex8@yahoo.fr','$2b$12$Zf7EnaNmWsE9H3KwGz5GiOASc6cMP9AOM6wmVENfM7kfSIdjBd6gO','simon','alex','3');
+INSERT INTO utilisateur VALUES ('noah81@yahoo.fr','$2b$12$fIWkdYmLrk4sy6nRXBk9yOQSM7FQ2mYrqAff3fj2ED1Slomlowheu','sanchez','noah','8c');
+INSERT INTO utilisateur VALUES ('louise56@laposte.net','$2b$12$sgyv4mjKuOSc9Z/H.upjEeJJRBDA0H9tmQtDitrHtFzThUOxlmhj6','dupuy','louise','8b');
+INSERT INTO utilisateur VALUES ('oceane91@hotmail.com','$2b$12$Uxm14TfsDKKtbcke4XQyd.vcMmdmaekmdipGkadFYs6YyrgFVyUAu','lopez','oceane','6a');
+INSERT INTO utilisateur VALUES ('louis58@laposte.net','$2b$12$lRmD5BI0mhgBBM5C0BEf7uRvb9qdQjZA.U9s60hfsM7uuKAvjoEQK','laurent','louis','3');
+INSERT INTO utilisateur VALUES ('blanc.rose70@gmail.com','$2b$12$zyNeZC6MBx8wPaRfSr/cj.0NB4qoz/VNvgSqNnN2Tn4l/3fbXethy','blanc','rose','8a');
+INSERT INTO utilisateur VALUES ('alba53@gmail.com','$2b$12$vnbDUczBUr6z5Cd8AhWSee4t/.1n.MGDy4xu1/qaKpmjQYl41u1xC','garnier','alba','8b');
+INSERT INTO utilisateur VALUES ('lefevre.louise72@hotmail.com','$2b$12$DtFk.8lVV0dqXcWwM1usZuu56h3E.1UtqAzrq55/glkX/ItCqS1z2','lefevre','louise','5c');
+INSERT INTO utilisateur VALUES ('martin.alice96@laposte.net','$2b$12$MCuAfj1pZLJbfa6TJruG9Ozmc2UQWedFQvarM.y03lhnfI2vqjLbW','martin','alice','9a');
+INSERT INTO utilisateur VALUES ('lopez.emma11@yahoo.fr','$2b$12$qWs1GBz4IYdToCOTlVNrwuChiZGs8BE.PgWOeGheynFxGm7oDFkdC','lopez','emma','7c');
+INSERT INTO utilisateur VALUES ('alice88@gmail.com','$2b$12$yFn86ACOqH0owpZX6Eb2ne1M.5yLH1Bq8Emkp/YtSIqd.q4.Pipr.','durand','alice','6b');
+INSERT INTO utilisateur VALUES ('superuser@gmail.com','$2b$12$dv30yNrP3fB5itY6gYFy4.EfOUbz/nGRRkR11jIJwLvwAPNXWH.cC','super','user','1');
 
 
 
@@ -199,8 +200,8 @@ INSERT INTO TYPEESCA (nom,description) VALUES ('Escalade Traditionnelle', 'Les g
 INSERT INTO TYPEESCA (nom,description) VALUES ('Solo Integral','Escalade sans equipement de protection, meme sans corde. Tres dangereux');
 INSERT INTO TYPEESCA (nom,description) VALUES ('duo','Deux grimpeurs partagent la responsabilité de la conduite et de l assurage.');
 
-INSERT INTO cordee DEFAULT VALUES;
-INSERT INTO cordee DEFAULT VALUES;
+INSERT INTO cordee (nomcordee) VALUES ('faucon');
+INSERT INTO cordee (nomcordee) VALUES ('condor');
 
 INSERT INTO PARTIEC  (idcordee,mail) VALUES (1,'simon.alex8@yahoo.fr');
 INSERT INTO PARTIEC  (idcordee,mail) VALUES (1,'noah81@yahoo.fr');

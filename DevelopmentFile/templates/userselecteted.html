@@ -1,6 +1,6 @@
 {%extends "base.html"%}
 {%block pagetitle%}test get method{%endblock%}
-{%block title%}<h1> Fiche de {{content["nom"]}} {{content["prenom"]}} </h1>{%endblock%}
+{%block title%}<h1> Votre espace personnel </h1>{%endblock%}
 
 {%block content%}
     <p>Identifiant : {{content["mail"]}}  </p>
@@ -11,5 +11,10 @@
     <h2>Cet utilisateur est un moniteur! contactez le si vous avez besoin de conseil </h2>
     {%endif%}
 
+    {%if test!=[]%}
     <h2>l'historique de cordée de l'utilisateur : </h2>
+    {%for elem in lst%}
+        <p>test {{elem}}</p>
+    {%endfor%}
+    {%endif%}
 {%endblock%}

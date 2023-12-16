@@ -32,9 +32,9 @@ normalement la database est initialisée :).
 
 * page d'utilisateur : (nom prenom), historique, localite, niveau de difficulté, methode pour changer paramètre du compte (si logged in) si c'est un moniteur. 
 
-* creer redirection page 404
+* ~~creer redirection page 404~~
 
-* creer un super user : (une page super user permettant de faire des opérations)
+* ~~creer un super user~~ : et (une page super user permettant de faire des opérations)
 
 * afficher la to do list 
 

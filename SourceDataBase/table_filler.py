@@ -159,8 +159,12 @@ while i<NB_profile:
         res += f"INSERT INTO utilisateur VALUES ('{mail}','{mdp}','{nom}','{prenom}','{choice(LST_DIFFICULTE)}');\n"
         i += 1
 
-res += "\n"
 
+# On va ajouter le superuser
+mdpsuperuser=password_ctx.hash('admin')
+res+=f"INSERT INTO utilisateur VALUES ('superuser@gmail.com','{mdpsuperuser}','super','user','1');\n"
+res += "\n"
+# ça ne marche pas :(
 #Partie pour générer les sites d'escalades 
 # 
 #SiteEsca(IdSE,nom,CodePostal)
@@ -396,9 +400,10 @@ INSERT INTO TYPEESCA (nom,description) VALUES ('duo','Deux grimpeurs partagent l
 #Cordée(IdCordée)
 #Primary key : IdCordée
 #idCordée integer,
-
-for i in range(1,3) :
-    res+="INSERT INTO cordee DEFAULT VALUES;\n"
+#nomcordee varchar(20)
+cordeenom=['faucon','condor']
+for elem in cordeenom :
+    res+=f"INSERT INTO cordee (nomcordee) VALUES ('{elem}');\n"
 
 
 #Ici on va définir PartieC
