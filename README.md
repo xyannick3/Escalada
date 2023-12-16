@@ -28,5 +28,16 @@ normalement la database est initialisée :).
 
 * ~~Lier la difficulté des voie à la table difficulté.~~
 
+* Creer un menu interne à la voie (objet singulier), on veut pourvoir avoir la localite de la voie, si elle débouche ou si c'est une origine, la longueur, la difficulté, le type de voie 
+
+* page d'utilisateur : (nom prenom), historique, localite, niveau de difficulté, methode pour changer paramètre du compte (si logged in) si c'est un moniteur. 
+
+* creer redirection page 404
+
+* creer un super user : (une page super user permettant de faire des opérations)
+
+* afficher la to do list 
+
+* creer propositions/ cordées (à développer)
 
 * Remplir la todo list :)
