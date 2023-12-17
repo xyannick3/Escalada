@@ -19,9 +19,9 @@
     <tbody>
         {% for item in content%}
             <tr>
-                <td>{{item["nom"]}}</td>
+                <td><div onmouseout="this.style.backgroundColor='#ffffff'" onmouseover="this.style.backgroundColor='#e74c3c'"  onclick="location.href =  '{{url_for("voie", select=item["idv"])}}'">{{item["nom"]}}</div></td>
                 <td>{{item["longueur"]}}</td>
-                <td><div onclick = "location.href='{{url_for("difficultés", select=item["fr"])}}';">{{item["fr"]}}</div></td>
+                <td><div onmouseout="this.style.backgroundColor='#ffffff'" onmouseover="this.style.backgroundColor='#e74c3c'" onclick = "location.href='{{url_for("difficultés", select=item["fr"])}}';">{{item["fr"]}}</div></td>
             </tr>
         {%endfor%}
     </tbody>

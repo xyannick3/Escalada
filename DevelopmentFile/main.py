@@ -222,5 +222,25 @@ def user(select) :
 @app.errorhandler(404)
 def page_not_found(error) : 
     return render_template('404.html'), 404
+
+
+@app.route('/voie/<select>')
+def voie(select) : 
+    if 'mail' not in session :
+        return redirect('login')
+    
+    with db.connect() as conn :
+        with conn.cursor(cursor_factory=psycopg2.extras.NamedTupleCursor) as cur : 
+            cur.execute("select * from voie where idv=%s;", (select,))
+            res=cur.fetchall()
+            cur.execute("select * from siteesca where idse='%s'", (res[0][5],))
+            sit=cur.fetchall()
+            print(f"test{sit}")
+            cur.execute("select * from localite where codepostal=%s", (sit[0][2],))
+            ville=cur.fetchall()
+            print(f"test {ville}")
+    
+    return render_template('voie.html', content=res,site=sit[0],ville=ville[0])
+
 if __name__ == "__main__" :
     app.run()

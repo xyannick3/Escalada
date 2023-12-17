@@ -20,7 +20,7 @@
             <tr>
                 <td><a href={{url_for("site", select=item["idse"])}}>{{item["nom"]}}</a></td>
                 
-                <td>{{item["codepostal"]}}</td>
+                <td><a href="https://www.google.com/maps/search/{{item["codepostal"]}}/" target="_blank">{{item["codepostal"]}}</td></a>
             </tr>
         {%endfor%}
     </tbody>

@@ -1,0 +1,10 @@
+{%extends "base.html"%}
+{%block pagetitle%}test get method{%endblock%}
+{%block title%}<h1>{{content[0]["nom"]}}</h1>{%endblock%}
+
+{%block content%}
+<p>La voie "{{content[0]["nom"]}}" est de type {{content[0]["type"]}}, de difficulté <a href='{{url_for("difficultés", select=content[0]["fr"])}}'>{{content[0]["fr"]}}</a>. </p>
+
+<p>Cette voie appartient à <a href="{{url_for('site',select=site['idse'])}}">{{site['nom']}}</a> situé à {{ville["nom"]}} 
+    <a href="https://www.google.com/maps/search/{{site[2]}}/" target="_blank">{{site['codepostal']}}</a></p>
+{%endblock%}
