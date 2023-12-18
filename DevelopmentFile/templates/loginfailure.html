@@ -1,6 +1,6 @@
 {%extends "base.html"%}
 {%block pagetitle%}test get method{%endblock%}
-{%block title%}test get method{%endblock%}
+{%block title%}<h2>test get method</h2>{%endblock%}
 
 {%block content%}
 <form action="#" method="post">
@@ -12,4 +12,5 @@
     </form>
     <p>mot de passe incorrect</p>
 </form>
+<a href={{url_for('register')}}>Pas encore inscript?</a>
 {%endblock%}

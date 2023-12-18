@@ -215,8 +215,15 @@ img.logo {
     width: auto;
 }
 
-/* Gestion du milieu du header */
-
+/* Gestion du milieu du contenu de la page */
+#center_wrapper {
+    position: absolute;
+    top: 5rem;
+    left: 0;
+    width: 100%;
+    height: fit-content;
+    margin: 1rem;
+}
 
 
 

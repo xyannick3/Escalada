@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+<title>{%block pagetitle%}{%endblock%}</title>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    table {
+      border-collapse: collapse;
+      width:100%;
+    }
+    th,td{
+      border:1px solid #dddddd;
+      text-align: left;
+      padding : 8px;
+    }
+    th{
+      background-color: #f2f2f2;
+    }
+
+  </style>
+</head>
+
+<header>
+  
+  {%block title%}{%endblock%}
+</header>
+
+<nav style="text-align:center; background-color:LightGray">
+  <a href="/">Accueil</a> -
+  <a href={{url_for('difficulté')}}>difficultés</a> -
+  <a href="{{url_for('sites')}}">Liste des sites</a> -
+  <a href="{{url_for('login')}}">Se connecter</a> -
+  <a href="{{url_for('cordees')}}">Liste des cordées</a>  
+  {%if 'mail' in session%}
+  -
+  <a href="{{url_for('user',select=session['mail'])}}">page utilisateur</a>
+  {%endif%}
+</nav>
+
+{%block content%}{%endblock%}
+{%with messages = get_flashed_messages(with_categories=True)%}
+  {%if messages%}
+        {%for category,messages in messages%}
+        {%if category == "error"%}
+          <div style="color:red;" role="alert">
+            {{messages}}
+            
+          </div>
+        {%endif%}
+    {%endfor%}
+  {%endif%}
+{%endwith%}
+
+</html>
