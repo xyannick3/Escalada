@@ -1,0 +1,10 @@
+/*File containing the color codes for the light theme*/
+:root {
+    --text: #172108;
+    --background: #fdfefb;
+    --primary: #9d72df;
+    --secondary: #6c6c71;
+    --accent: #5926a6;
+    --background-accent: #d9dbd5;
+    --background-accent-2: #979993;
+}

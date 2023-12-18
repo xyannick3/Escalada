@@ -1,0 +1,228 @@
+<!doctype html>
+<html>
+<head>
+    <title>Escalada</title>
+    <link href="{{ url_for('static', filename = 'website_day.css')}}" rel="stylesheet" id="lightmod">
+    <link href="{{ url_for('static', filename = 'website.css')}}" rel="stylesheet">
+    <meta charset="utf-8">
+    
+  </head>
+<body id="page_body">
+    <header>
+      <div class="header_wrapper">
+
+        <div id="header_left">
+          <div class="logo">
+            <a href="" draggable="false">
+                <img
+                src = "{{ url_for('static', filename = 'img/escaladalogo.png') }}"
+                alt = "ESCALADA"
+                class="logo"
+                onclick="javascript:window.location('')"
+                draggable="false"
+                >
+            </a>
+          </div>
+        </div>
+
+
+        <div id="header_center">
+          <div class="pages_index">
+            <p>
+              Ceci est un lien; ceci sera un autre
+            </p>
+          </div>
+        </div>
+
+
+        <div id="header_right">
+          <div class="page_lightmod_button">
+            <input type="checkbox" name="lightmod" id="toggle_switch">
+            <label for="toggle_switch" class="switch">
+              <img
+              src="{{ url_for('static', filename = 'img/lightmod_icon_day.png') }}"
+              alt="Jour"
+              class="switch_img"
+              id="img_lightswitch"
+              draggable="false"
+              >
+            </label>
+          </div>
+
+
+
+          <div class="page_profile_icon">
+            {% if connected == False %} <!-- Si utilisateur est connecter, on lui montre le menu déroulant addapté-->
+
+            <div class="profile_icon_img" id="profile_button">
+              <img
+              src="{{ url_for('static', filename = 'img/default_user_account_icon_day.png') }}"
+              alt="Connection/Inscription"
+              class="page_profile_icon"
+              id="img_login_icon"
+              draggable="false">
+            </div>
+            <ul class="deroulant_profile" type="none" id="profile_button_deroulant">
+              <li>
+                <div onclick="location.href='connection';">
+                  <img
+                  src="{{ url_for('static', filename = 'img/login_icon_day.png') }}"
+                  class="icon"
+                  alt=""
+                  id="icon_login"
+                  draggable="false">
+                  <div>Connection</div>
+                </div>
+              </li>
+              <li>
+                <div onclick="location.href='inscription';">
+                  <img
+                  src="{{ url_for('static', filename = 'img/signin_icon_day.png') }}"
+                  class="icon"
+                  alt=""
+                  id="icon_signin"
+                  draggable="false">
+                  <div>Inscription</div>
+                </div>
+              </li>
+            </ul>
+
+            {% else %} <!-- Si utilisateur n'est pas connecter, on lui montre aussi le menu addapté -->
+
+            <div class="profile_icon_img" id="profile_button">
+              {% if pfp != None %}
+              <img 
+              src=""
+              class="profile_icon_img"
+              alt="Profile personnel"
+              draggable="false">
+              {% else %}
+              <img
+              src="{{ url_for('static', filename = 'img/default_user_account_icon_day.png') }}"
+              alt="Connection/Inscription"
+              class="page_profile_icon"
+              id="img_login_icon"
+              draggable="false">
+              {% endif %}
+            </div>
+            <ul class="deroulant_profile" type="none" id="profile_button_deroulant">
+              <li>
+                <div onclick="location.href='monespace';">
+                  <img
+                  src="{{ url_for('static', filename = 'img/myspace_icon_day.png') }}"
+                  class="icon"
+                  alt=""
+                  id="icon_myspace"
+                  >
+                  <div>Mon espace</div>
+                </div>
+              </li>
+              <li>
+                <div onclick="location.href='deconnection';">
+                  <img
+                  src="{{ url_for('static', filename = 'img/logout_icon_day.png') }}"
+                  class="icon"
+                  alt=""
+                  id="icon_logout"
+                  >
+                  <div>Deconnection</div>
+                </div>
+              </li>
+            </ul>
+
+            {% endif %}
+          </div>
+        </div>
+
+
+      </div>
+    </header>
+    <div class="center">
+
+    </div>
+
+    <footer>
+      <div class="footer_wrapper">
+        <div>© 2023 Escalada. Tout droit réservé</div>
+      </div>
+    </footer>
+
+
+    <script>//Script for light and dark mod
+      let lightmod_stylesheet = document.getElementById( "lightmod" );
+      let lightmodbutton = document.getElementById( "toggle_switch" );let lightmodswitchimg = document.getElementById( "img_lightswitch" );
+      let defaultprofilepic = document.getElementById( "img_login_icon" );
+      {% if connected == False %}
+      let icon_login = document.getElementById( "icon_login" );
+      let icon_signin = document.getElementById( "icon_signin" );
+      {% else %}
+      let icon_myspace = document.getElementById( "icon_myspace" );
+      let icon_logout = document.getElementById( "icon_logout" );
+      {% endif %}
+      let st = (lightmodbutton.checked) ? 1 : 0;
+      
+      function cookie_get(cn) {
+        let decodedCookie = decodeURIComponent(document.cookie).replace(new RegExp('; ', 'g'),';');
+        let ca = decodedCookie.split(';').filter(function(cookie) { return cookie.split('=')[0] == cn; });
+        if (ca.length == 1) { return ca[0].split('=')[1]; }
+        return false;	 
+      };
+
+      function cookie_lightmod_set(val) {
+        let d = new Date();
+        let expiredays = 60;
+        d.setTime(d.getTime() + (expiredays*24*60*60*1000));
+        let expires = 'expires='+ d.toUTCString();
+        document.cookie = `lightModCookie=${val};${expires};path=/`;
+      };
+
+      function set_light_mod(n) {
+        if (n == 1) {
+          lightmod_stylesheet.href = "{{ url_for('static', filename = 'website_night.css')}}";
+          lightmodswitchimg.src = "{{ url_for('static', filename = 'img/lightmod_icon_night.png')}}";
+          {% if connected == False %}
+          defaultprofilepic.src = "{{ url_for('static', filename = 'img/default_user_account_icon_night.png')}}";
+          icon_login.src = "{{ url_for('static', filename = 'img/login_icon_night.png')}}";
+          icon_signin.src = "{{ url_for('static', filename = 'img/signin_icon_night.png')}}";
+          {% else %}
+          icon_myspace.src = "{{ url_for('static', filename = 'img/myspace_icon_night.png')}}";
+          icon_logout.src = "{{ url_for('static', filename = 'img/logout_icon_night.png')}}";
+          {% endif %}
+        } else if (n == 0) {
+          lightmod_stylesheet.href = "{{ url_for('static', filename = 'website_day.css')}}";
+          lightmodswitchimg.src="{{ url_for('static', filename = 'img/lightmod_icon_day.png')}}";
+          {% if connected == False %}
+          defaultprofilepic.src="{{ url_for('static', filename = 'img/default_user_account_icon_day.png')}}";
+          icon_login.src="{{ url_for('static', filename = 'img/login_icon_day.png')}}";
+          icon_signin.src="{{ url_for('static', filename = 'img/signin_icon_day.png')}}";
+          {% else %}
+          icon_myspace.src = "{{ url_for('static', filename = 'img/myspace_icon_day.png')}}";
+          icon_logout.src = "{{ url_for('static', filename = 'img/logout_icon_day.png')}}";
+          {% endif %}
+        }
+      };
+
+      lightmodbutton.addEventListener("click", function() {
+        let st = (this.checked) ? 1 : 0;
+        set_light_mod(st);
+        cookie_lightmod_set(st)
+      });
+
+      window.onload = function() {
+        console.log((cookie_get('lightModCookie')));
+        if (cookie_get('lightModCookie') == 1) {
+          cookie_lightmod_set(Number(cookie_get('lightModCookie')));
+          st = (Number(cookie_get('lightModCookie')) == 1) ? 1 : 0;
+          lightmodbutton.checked = st
+          set_light_mod(st)
+        } else {
+          cookie_lightmod_set(0);
+        }
+      };
+
+      setTimeout(function() {
+        document.getElementsByTagName('body')[0].style.transition="all 300ms";
+      }, 200);
+  </script>
+</body>
+</html>
