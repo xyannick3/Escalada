@@ -1,0 +1,240 @@
+@import url('https://fonts.googleapis.com/css?family=Noto%20Sans%20Tai%20Viet:700|Noto%20Sans%20Tai%20Viet:400');
+
+/*Partie apparence du texte et de la page en générale*/
+body {
+    font-family: 'Noto Sans Tai Viet';
+    font-weight: 400;
+    background-color: var(--background);
+    color: var(--text);
+    max-width: 100%;
+    overflow-x: hidden;
+/*    transition:all 300ms; is set by the JS code, in order not to have useless animation when loading the dark theme by default.*/
+  }
+  
+h1, h2, h3, h4, h5 {
+font-family: 'Noto Sans Tai Viet';
+font-weight: 700;
+}
+
+html {font-size: 100%;} /* 16px */
+
+h1 {font-size: 4.210rem; /* 67.36px */}
+
+h2 {font-size: 3.158rem; /* 50.56px */}
+
+h3 {font-size: 2.369rem; /* 37.92px */}
+
+h4 {font-size: 1.777rem; /* 28.48px */}
+
+h5 {font-size: 1.333rem; /* 21.28px */}
+
+small {font-size: 0.750rem; /* 12px */}
+
+.icon {
+    height: 100%;
+    width: auto;
+}
+
+/*Apparence du header*/
+header {
+    position: absolute;
+    top: 0;
+    left: 0;    
+    width: 100%;
+    background: linear-gradient( 45deg, var(--primary), var(--accent) );
+    height: 5rem;
+    display: flex;
+    transform-style: preserve-3d;
+}
+
+.header_wrapper {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    box-shadow: 0px 0px 7px #000000;
+    
+}
+
+#header_left {
+    position: absolute;
+    left: 0;
+    height: 100%;
+}
+
+#header_center {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    animation-duration: 0s;
+    animation: none;
+    transform: translate(-50%, -50%);
+    align-content: center;
+    justify-content: center;
+}
+
+#header_right {
+    position: absolute;
+    right: 0;
+    height: 100%;
+    display: flex;
+    transform: translate(-0.5rem, 0);
+    
+}
+
+#header_right:hover {
+    transform: translate(6.5rem, 0);
+}
+
+.pages_index {
+    width:max-content;
+}
+
+/* Gestion du menu déroulant de connection */
+div.page_profile_icon {
+    float: right;
+    height: 100%;
+    width: fit-content;
+    justify-self: right;
+    align-self:center;
+}
+
+div.profile_icon_img {
+    background-color: var(--background);
+    height: 4rem;
+    width: 4rem;
+    border-radius: 50%;
+    display: flex;
+    transform: translate( 0, 0.5rem);
+    justify-content: center;
+    overflow: hidden;
+}
+
+img.profile_icon_img {
+    height: 100%;
+    width: auto;
+}
+
+
+
+ul.deroulant_profile {
+    background-color: var(--background-accent);
+    position: relative;
+    border-radius: 0 0 0.5rem 0.5rem;
+    padding: 0.5rem;
+    transform: translate(-6.5rem, 0); /*déplacement du menu déroulant de connection sur la droite car coupé par défaut*/
+    box-shadow: inset 0 5px 5px -5px #000000;
+}
+
+
+ul.deroulant_profile > li {
+    height: 2rem;
+    width: 10rem;
+    text-align: center;
+    color: var(--text);
+    user-select: none;
+}
+
+ul.deroulant_profile > li:hover {
+    background-color: var(--background-accent-2);
+    border-radius: 0.25rem;
+}
+
+ul.deroulant_profile > li  > div {
+    text-decoration: none;
+    color: var(--text);
+    position: relative;
+    height: 100%;
+    width: 100%;
+    cursor: pointer;
+}
+
+ul.deroulant_profile > li  > div > img {
+    position: relative;
+    height: 100%;
+    float: left;
+    margin-left: 0.2rem;
+    margin-right: 0.2rem;
+}
+
+ul.deroulant_profile > li  > div > div {
+    text-align: center;
+    position: relative;
+    float: inline-start;
+    top: 50%;
+    transform: translateY(-50%);
+    font-weight: bolder;
+}
+
+#header_right:not(:hover) ul.deroulant_profile{
+    display: none;
+}
+
+
+/* Gestion du bouton du mode sombre/claire */
+.page_lightmod_button {
+    float: right;
+    height: 5rem;
+    width: 5rem;
+    justify-content: center;
+    display: flex;
+    align-self:center;
+}
+
+.switch {
+    width: 55%;
+    height: 55%;
+    background-color: var(--background);
+    border-radius: 50%;
+    justify-content: center;
+    align-self:center;
+}
+
+input[type="checkbox"]{/*cache la checkbox*/
+    display: none;
+}
+
+.switch_img {
+    height: 100%;
+    width: auto;
+}
+
+
+/* Gestion du logo */
+div.logo {
+    margin-left: 1rem;
+    margin-right: 1rem;
+    margin-top: 0.25rem;
+    height: 5rem;
+    width: 5rem;
+    display: flex;
+    justify-content: baseline;
+}
+
+img.logo {
+    height: 100%;
+    width: auto;
+}
+
+/* Gestion du milieu du header */
+
+
+
+
+
+/* Gestion du footer */
+footer {
+    position: absolute;
+    align-items: center;
+    align-content: center;
+    bottom: 0;
+    left: 0;
+    height: 3rem;
+    width: 100%;
+    background-color: var(--secondary);
+}
+
+.footer_wrapper {
+    position: relative;
+    font-weight: bold;
+    text-align: center;
+}

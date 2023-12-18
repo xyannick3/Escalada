@@ -1,0 +1,10 @@
+/*File containing the color codes for the night theme*/
+:root {
+    --text: #edf7de;
+    --background: #1e1c20;
+    --primary: #4c208d;
+    --secondary: #3c3b3d;
+    --accent: #8c59d9;
+    --background-accent: #343137;
+    --background-accent-2: #4b474f;
+}

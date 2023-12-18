@@ -16,6 +16,9 @@ app = Flask(__name__)
 app.secret_key=b'3661837482e6ec2b355b0dfac16b7c15338627557c416988e8d1c3d43db02820'
 
 class User(UserMixin) :
+    """
+    Cette classe permet de stocker les éléments de connections
+    """
     def __init__ (self, user_id, nom,prenom, password,difficulte) :
         self.difficulte=difficulte
         self.id=user_id
@@ -25,6 +28,9 @@ class User(UserMixin) :
 
 @app.route("/")
 def homepage() : 
+    """
+    permet d'afficher la page principale 
+    """
     if 'mail' not in session : 
         return redirect('login')
     return render_template("homePage.html",ses=session)
@@ -39,6 +45,9 @@ def load_user(id) :
 
 @app.route("/difficulté/<select>")
 def difficultés(select) : 
+    """
+    affiche la table des difficultés si une ligne est selectionnée.
+    """
     with db.connect() as conn :
         with conn.cursor(cursor_factory=psycopg2.extras.NamedTupleCursor) as cur:
             cur.execute("select * from difficulte;")
@@ -47,7 +56,9 @@ def difficultés(select) :
 
 @app.route("/difficulté")
 def difficulté():
-    
+    """
+    affiche la table des difficulté sans selection.
+    """
     with db.connect() as conn :
         with conn.cursor(cursor_factory=psycopg2.extras.NamedTupleCursor) as cur:
             cur.execute("select * from difficulte;")
@@ -57,6 +68,9 @@ def difficulté():
 
 @app.route("/sites")
 def sites() :
+    """
+    Affiche la table des sites.
+    """
     with db.connect() as conn: 
         with conn.cursor(cursor_factory=psycopg2.extras.NamedTupleCursor) as cur:
             cur.execute("select * from siteesca;")
@@ -66,6 +80,9 @@ def sites() :
 
 @app.route("/site/<select>")
 def site(select) :
+    """
+    Affiche un site et ses voies.
+    """
     with db.connect() as conn: 
         with conn.cursor(cursor_factory=psycopg2.extras.NamedTupleCursor) as cur : 
             cur.execute("select voie.idv, voie.nom, voie.longueur, voie.fr from siteesca, voie where (siteesca.idse = voie.idse) AND (siteesca.idse=%s);",(select,))
@@ -77,6 +94,9 @@ def site(select) :
 
 @app.route("/register",methods=["GET","POST"])
 def register() :
+    """
+    Fiche d'inscription
+    """
     if request.method=="POST" : 
         nom= request.form.get("nom")
         prenom = request.form.get("prenom")
@@ -137,6 +157,9 @@ def register() :
 
 @app.route("/login",methods=["GET","POST"])
 def login() :
+    """
+    page de la connexion.
+    """
     if request.method == "POST": 
         log=request.form.get('id')
         psw=request.form.get('psw')
@@ -158,6 +181,9 @@ def login() :
 
 @app.route("/cordees",methods=["GET","POST"])
 def cordees() : 
+    """
+    affiche la liste des cordées.
+    """
     if 'mail' not in session : 
             return redirect('login')
     with db.connect() as conn : 
@@ -169,6 +195,9 @@ def cordees() :
 
 @app.route("/cordee/<select>")
 def cordeeselect(select) : 
+    """
+    affiche une cordée selectionnée.
+    """
     if 'mail' not in session :
         return redirect('login')
     nom=[]
@@ -188,6 +217,10 @@ def cordeeselect(select) :
 
 @app.route("/user/<select>")
 def user(select) :
+    """
+    affiche la fiche d'un utilisateur, si l'utilisateur est l'utilisateur connecté, 
+    permet d'accèder à la page de personalisation.
+    """
     if 'mail' not in session :
         return redirect('login')
     
@@ -225,6 +258,9 @@ def user(select) :
 
 @app.route("/usersetting", methods=["POST","GET"])
 def usersetting() :
+    """
+    page de configuration du compte.
+    """
     if 'mail' not in session :
         return redirect('login')
     
@@ -297,11 +333,17 @@ def usersetting() :
 
 @app.errorhandler(404)
 def page_not_found(error) : 
+    """
+    redirection pour l'erreur 404.
+    """
     return render_template('404.html'), 404
 
 
 @app.route('/voie/<select>')
 def voie(select) : 
+    """
+    Cette fonction permet de selectioner les voies indépendante
+    """
     if 'mail' not in session :
         return redirect('login')
     
@@ -309,13 +351,37 @@ def voie(select) :
         with conn.cursor(cursor_factory=psycopg2.extras.NamedTupleCursor) as cur : 
             cur.execute("select * from voie where idv=%s;", (select,))
             res=cur.fetchall()
-            cur.execute("select * from siteesca where idse='%s'", (res[0][5],))
+            cur.execute("select * from siteesca where idse='%s';", (res[0][5],))
             sit=cur.fetchall()
-            print(f"test{sit}")
-            cur.execute("select * from localite where codepostal=%s", (sit[0][2],))
+            cur.execute("select * from localite where codepostal=%s;", (sit[0][2],))
             ville=cur.fetchall()
-            print(f"test {ville}")
-    return render_template('voie.html', content=res,site=sit[0],ville=ville[0])
+            cur.execute("select * from typevoie where idtv=%s;",(res[0][3],))
+            typ=cur.fetchall()
+    return render_template('voie.html', content=res,site=sit[0],ville=ville[0],typ=typ[0])
+
+
+@app.route("/propositions")
+def propositions() :
+    if 'mail' not in session : 
+        return redirect('login')
+    with db.connect() as conn :
+        with conn.cursor(cursor_factory=psycopg2.extras.NamedTupleCursor) as cur : 
+            cur.execute("select * from proposition") 
+            res=cur.fetchall()
+    
+
+
+
+@app.route("/test")
+
+def test() :
+    """C'est un test pour le nouveau template"""
+    return render_template('home.html')
+
+
+@app.route("/transfer")
+def transfer():
+    ...
 
 if __name__ == "__main__" :
     app.run()
