@@ -1,3 +1,8 @@
+"""
+CECI EST LE MAIN
+"""
+
+
 from flask import Flask, render_template, request, redirect, url_for, session, flash, abort
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 import secrets 
@@ -10,7 +15,7 @@ app = Flask(__name__)
 
 app.secret_key=b'3661837482e6ec2b355b0dfac16b7c15338627557c416988e8d1c3d43db02820'
 
-class User(UserMixin) : 
+class User(UserMixin) :
     def __init__ (self, user_id, nom,prenom, password,difficulte) :
         self.difficulte=difficulte
         self.id=user_id
@@ -173,13 +178,13 @@ def cordeeselect(select) :
             result = cur.fetchall()
             cur.execute("select * from cordee where idcordee=%s;",(select,))
             cordee=cur.fetchall()
-            
+            print(cordee)
             for item in result : 
                 cur.execute("select nom,prenom from utilisateur where mail=%s", (item[0],))
                 res=cur.fetchall()
                 res=res[0]
                 nom.append((item[0],f"{res[0]} {res[1]}"))
-    return render_template('cordee.html', content=nom,cordee=cordee)
+    return render_template('cordee.html', content=nom,cordee=cordee[0])
 
 @app.route("/user/<select>")
 def user(select) :
@@ -196,27 +201,98 @@ def user(select) :
     if not result :
         abort(404)
     with db.connect() as conn : 
-            with conn.cursor(cursor_factory=psycopg2.extras.NamedTupleCursor) as cur: 
-                cur.execute('select * from utilisateur where mail=%s', (select,))
-                result=cur.fetchall()
-                cur.execute('select * from estguidede where mail=%s', (select,))
-                guide=cur.fetchall()
-                cur.execute('select * from partiec where mail=%s', (select,))
-                cordee=cur.fetchall()
-                lst=[]
-                for elem in cordee : 
-                    cur.execute('select * from cordee where idcordee = %s', (elem[0],))
-                    lst.append(cur.fetchall())
+        with conn.cursor(cursor_factory=psycopg2.extras.NamedTupleCursor) as cur: 
+            cur.execute('select * from utilisateur where mail=%s', (select,))
+            result=cur.fetchall()
+            cur.execute('select * from estguidede where mail=%s', (select,))
+            guide=cur.fetchall()
+            cur.execute('select * from partiec where mail=%s', (select,))
+            cordee=cur.fetchall()
+            lst=[]
+            for elem in cordee : 
+                cur.execute('select * from cordee where idcordee = %s', (elem[0],))
+                test=cur.fetchall()
                 
-    for elem in lst : 
-        print(f"test : {elem[0]}")
-    lst=[1,2,3,4]
+                lst.append(test[0])
+                print(lst)
+                
     if session['mail']!=select :
         return render_template('user.html',content=result[0],guide=guide,cordee=cordee,lst=lst)
     
 
-    return render_template('userselected.html',content=result[0],guide=guide)  
+    return render_template('userselected.html',content=result[0],guide=guide,cordee=cordee,lst=lst)  
     
+
+@app.route("/usersetting", methods=["POST","GET"])
+def usersetting() :
+    if 'mail' not in session :
+        return redirect('login')
+    
+    if request.method == "GET" : 
+        with db.connect() as conn :
+            with conn.cursor(cursor_factory=psycopg2.extras.NamedTupleCursor) as cur :
+                cur.execute("select * from utilisateur where mail= %s;", (session["mail"],))
+                content=cur.fetchall()
+                cur.execute("select * from difficulte;")
+                difficulte=cur.fetchall()
+        return render_template('usersetting.html',content=content[0],difficulte=difficulte)
+    
+    if request.method == "POST" :
+        nom= request.form.get("nom")
+        prenom = request.form.get("prenom")
+        email=request.form.get("id")
+        psw1=request.form.get("psw1")
+        psw2=request.form.get("psw2")
+        fr=request.form.get('niveau')
+
+        with db.connect() as conn : 
+            with conn.cursor() as cur : 
+                cur.execute("select mail from utilisateur where mail=%s; ",(email,))
+                resultemail = cur.fetchall()
+        
+        if resultemail and email!=session['mail']:
+            flash('Email déjà utilisé.', category='error')
+            print(1)
+        elif nom==None or prenom==None or email ==None or psw1==None or psw2==None :
+            flash('veuillez remplir les valeurs')
+            print(nom,prenom,email,psw1,psw2,fr)
+        elif psw1!=psw2 : 
+            flash('Les mots de passes ne sont pas les même', category='error')
+            print(3)
+        elif (len(nom)>25 or len(nom)<2) : 
+            print(4)
+            flash('taille du nom incorrecte.', category='error')
+        elif (len(prenom)>25 or len(prenom)<2) :
+            print(5)
+            flash('taille du prénom incorrecte.', category='error')
+        elif ('@' not in email) or len(email)<10 or len(email)>320 : 
+            print(6)
+            flash('email incorrecte', category='error')
+        elif len(psw1)>25 : 
+            print(7)
+            flash('taille du mot de passe incorrecte', category='error')
+        elif fr not in ['1','2','3','4','5a','5b','5c','6a','6b','6c','7a','7b','7c','8a','8b','8c','9a','9c']:
+            print(8)
+            flash('difficulté non existante',category='error')
+            
+        else : 
+            print(9)
+            new_ser=User(user_id=email,nom=nom,prenom=prenom,password=psw1,difficulte=fr)
+            if email==session["mail"] :
+                with db.connect() as conn : 
+                    with conn.cursor() as cur : 
+                        cur.execute("update utilisateur set mdp =%s, nom= %s, prenom =%s, fr=%s where mail=%s;",(password_ctx.hash(psw1),nom,prenom,fr,email,))
+                        conn.commit()
+            else : 
+                with db.connect() as conn :
+                    with conn.cursor() as cur :
+                        cur.execute("DELETE FROM utilisateur WHERE mail=%s",(session["mail"],))
+                        cur.execute("INSERT INTO utilisateur (mail,mdp,nom,prenom,fr) VALUES (%s,%s,%s,%s,%s)",(new_ser.id,password_ctx.hash(new_ser.password) ,new_ser.nom,new_ser.prenom,new_ser.difficulte))
+                        conn.commit()
+            flash('User modified')
+            session['mail']=new_ser.id
+            return redirect(url_for('homepage',ses=session))
+    ...
 
 
 @app.errorhandler(404)
@@ -239,7 +315,6 @@ def voie(select) :
             cur.execute("select * from localite where codepostal=%s", (sit[0][2],))
             ville=cur.fetchall()
             print(f"test {ville}")
-    
     return render_template('voie.html', content=res,site=sit[0],ville=ville[0])
 
 if __name__ == "__main__" :

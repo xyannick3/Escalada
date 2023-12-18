@@ -11,10 +11,14 @@
     <h2>Cet utilisateur est un moniteur! contactez le si vous avez besoin de conseil </h2>
     {%endif%}
 
-    {%if test!=[]%}
+    {%if lst!=[]%}
     <h2>l'historique de cordée de l'utilisateur : </h2>
     {%for elem in lst%}
-        <p>test {{elem}}</p>
+    <table>
+        <td>test {{elem["nomcordee"]}}</td>
+    </table>
     {%endfor%}
     {%endif%}
+
+    <p><a href="{{url_for('usersetting')}}">Souhaitez vous modifier les paramètres de votre compte?</a></p>
 {%endblock%}

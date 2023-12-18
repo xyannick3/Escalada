@@ -1,0 +1,23 @@
+{%extends "base.html"%}
+{%block pagetitle%}test get method{%endblock%}
+{%block title%}Modification des paramètres du compte de {%endblock%}
+
+{%block content%}
+<form action="#" method="post">
+    <p>Inscrivez-vous</p>
+    <p><input value="{{content['nom']}}" type="text" id="nom"name="nom" placeholder="Nom de l'utilisateur"></p>
+    <p><input value="{{content['prenom']}}" type="text" id="prenom"name="prenom" placeholder="prenom de l'utilisateur"></p>
+    <p><input value="{{content['mail']}}" type="text" id="id"name="id" placeholder="Email"></p>
+    <label for = "niveau">choisisez votre niveau</label>
+    <select id="niveau" name="niveau">
+    {%for item in difficulte%}
+    <option value="{{ item['fr'] }}" {%if content['fr']==item['fr']%}selected{%endif%} >{{item['fr']}}</option>
+    {%endfor%}
+    </select>
+    <p>Réentrez votre mdp où modifiez le.</p>
+    <p><input type="password" id="psw1" name="psw1" class= "form-control" placeholder="Mot De Passe"></p>
+    <p><input type="password" id="psw2" name="psw2" class= "form-control" placeholder="Confirmez Mot De Passe"></p>
+    <div><button class="btn btn-primary" type= "submit">S'inscrire</button></div>
+</form>
+<a href={{url_for('login')}}>déjà inscript?</a>
+{%endblock%}

@@ -11,5 +11,14 @@
     <h2>Cet utilisateur est un moniteur! contactez le si vous avez besoin de conseil </h2>
     {%endif%}
 
+
+    
+    {%if test!=[]%}
     <h2>l'historique de cordée de l'utilisateur : </h2>
+    {%for elem in lst%}
+    <table>
+        <td>test {{elem["nomcordee"]}}</td>
+    </table>
+    {%endfor%}
+    {%endif%}
 {%endblock%}
