@@ -5,7 +5,7 @@ CECI EST LE MAIN
 
 from flask import Flask, render_template, request, redirect, url_for, session, flash, abort
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
-import secrets 
+import secrets
 import psycopg2.extras
 import db
 from passlib.context import CryptContext
@@ -23,15 +23,15 @@ class User(UserMixin) :
         self.difficulte=difficulte
         self.id=user_id
         self.nom = nom
-        self.prenom = prenom 
+        self.prenom = prenom
         self.password = password
 
 @app.route("/")
-def homepage() : 
+def homepage() :
     """
     permet d'afficher la page principale 
     """
-    if 'mail' not in session : 
+    if 'mail' not in session :
         return redirect('login')
     return render_template("homePage.html",ses=session)
 
@@ -39,12 +39,12 @@ login_manager=LoginManager()
 login_manager.login_view= "login"
 login_manager.init_app(app)
 @login_manager.user_loader
-def load_user(id) : 
+def load_user(id) :
     return User.query.get(str(id))
 
 
 @app.route("/difficulté/<select>")
-def difficultés(select) : 
+def difficultés(select) :
     """
     affiche la table des difficultés si une ligne est selectionnée.
     """
@@ -71,7 +71,7 @@ def sites() :
     """
     Affiche la table des sites.
     """
-    with db.connect() as conn: 
+    with db.connect() as conn:
         with conn.cursor(cursor_factory=psycopg2.extras.NamedTupleCursor) as cur:
             cur.execute("select * from siteesca;")
             result=cur.fetchall()
@@ -83,9 +83,11 @@ def site(select) :
     """
     Affiche un site et ses voies.
     """
-    with db.connect() as conn: 
-        with conn.cursor(cursor_factory=psycopg2.extras.NamedTupleCursor) as cur : 
-            cur.execute("select voie.idv, voie.nom, voie.longueur, voie.fr from siteesca, voie where (siteesca.idse = voie.idse) AND (siteesca.idse=%s);",(select,))
+    with db.connect() as conn:
+        with conn.cursor(cursor_factory=psycopg2.extras.NamedTupleCursor) as cur :
+            cur.execute(
+                "select voie.idv, voie.nom, voie.longueur, voie.fr from siteesca, voie where (siteesca.idse = voie.idse) AND (siteesca.idse=%s);"
+                ,(select,))
             result=cur.fetchall()
     return render_template("site.html",content=result,ses=session)
     #SELECT voie.nom, voie.longueur, voie.fr from siteesca, voie where (siteesca.idse= voie.idse) AND (siteesca.idse=X);
@@ -97,7 +99,7 @@ def register() :
     """
     Fiche d'inscription
     """
-    if request.method=="POST" : 
+    if request.method=="POST" :
         nom= request.form.get("nom")
         prenom = request.form.get("prenom")
         email=request.form.get("id")
@@ -109,7 +111,7 @@ def register() :
             with conn.cursor() as cur : 
                 cur.execute("select mail from utilisateur where mail=%s; ",(email,))
                 resultemail = cur.fetchall()
-        
+
         if resultemail :
             flash('Email déjà utilisé.', category='error')
             print(1)
@@ -119,36 +121,39 @@ def register() :
         elif psw1!=psw2 : 
             flash('Les mots de passes ne sont pas les même', category='error')
             print(3)
-        elif (len(nom)>25 or len(nom)<2) : 
+        elif (len(nom)>25 or len(nom)<2) :
             print(4)
             flash('taille du nom incorrecte.', category='error')
         elif (len(prenom)>25 or len(prenom)<2) :
             print(5)
             flash('taille du prénom incorrecte.', category='error')
-        elif ('@' not in email) or len(email)<10 or len(email)>320 : 
+        elif ('@' not in email) or len(email)<10 or len(email)>320 :
             print(6)
             flash('email incorrecte', category='error')
-        elif len(psw1)>25 : 
+        elif len(psw1)>25 :
             print(7)
             flash('taille du mot de passe incorrecte', category='error')
         elif fr not in ['1','2','3','4','5a','5b','5c','6a','6b','6c','7a','7b','7c','8a','8b','8c','9a','9c']:
             print(8)
             flash('difficulté non existante',category='error')
-            
-        else : 
+
+        else :
             print(9)
             new_ser=User(user_id=email,nom=nom,prenom=prenom,password=psw1,difficulte=fr)
             with db.connect() as conn :
                 with conn.cursor() as cur :
                     print("test")
-                    cur.execute("INSERT INTO utilisateur (mail,mdp,nom,prenom,fr) VALUES (%s,%s,%s,%s,%s)",(new_ser.id,password_ctx.hash(new_ser.password) ,new_ser.nom,new_ser.prenom,new_ser.difficulte))
+                    cur.execute(
+                        "INSERT INTO utilisateur (mail,mdp,nom,prenom,fr) VALUES (%s,%s,%s,%s,%s)",
+                        (new_ser.id,password_ctx.hash(new_ser.password) 
+                         ,new_ser.nom,new_ser.prenom,new_ser.difficulte))
                     conn.commit()
                     flash('User created')
                     session['mail']=new_ser.id
                     return redirect(url_for('homepage',ses=session))
 
-    with db.connect() as conn : 
-        with conn.cursor(cursor_factory=psycopg2.extras.NamedTupleCursor) as cur : 
+    with db.connect() as conn :
+        with conn.cursor(cursor_factory=psycopg2.extras.NamedTupleCursor) as cur :
             cur.execute("select * from difficulte;")
             result=cur.fetchall()
         print(result)
@@ -160,7 +165,7 @@ def login() :
     """
     page de la connexion.
     """
-    if request.method == "POST": 
+    if request.method == "POST":
         log=request.form.get('id')
         psw=request.form.get('psw')
         with db.connect() as conn:
@@ -170,45 +175,45 @@ def login() :
                 if not result :
                     return render_template("loginfailure.html",ses=session)
         password=result[0][0]
-        
-        if password_ctx.verify(psw,password) :  
+
+        if password_ctx.verify(psw,password) :
             session['mail']=log
             return render_template("loginsuccesful.html",content=log)
         else : return render_template("loginfailure.html")
-    else : 
+    else :
         return render_template('login.html')
 
 
 @app.route("/cordees",methods=["GET","POST"])
-def cordees() : 
+def cordees() :
     """
     affiche la liste des cordées.
     """
     if 'mail' not in session : 
-            return redirect('login')
+        return redirect('login')
     with db.connect() as conn : 
         with conn.cursor(cursor_factory=psycopg2.extras.NamedTupleCursor) as cur : 
             cur.execute("select * from cordee;")
             result =  cur.fetchall()
-    
+
     return render_template('cordees.html',content=result)
 
 @app.route("/cordee/<select>")
-def cordeeselect(select) : 
+def cordeeselect(select) :
     """
     affiche une cordée selectionnée.
     """
     if 'mail' not in session :
         return redirect('login')
     nom=[]
-    with db.connect() as conn : 
+    with db.connect() as conn :
         with conn.cursor(cursor_factory=psycopg2.extras.NamedTupleCursor) as cur : 
             cur.execute("select mail from partiec where idcordee=%s;",(select,))
             result = cur.fetchall()
             cur.execute("select * from cordee where idcordee=%s;",(select,))
             cordee=cur.fetchall()
             print(cordee)
-            for item in result : 
+            for item in result :
                 cur.execute("select nom,prenom from utilisateur where mail=%s", (item[0],))
                 res=cur.fetchall()
                 res=res[0]
@@ -223,13 +228,13 @@ def user(select) :
     """
     if 'mail' not in session :
         return redirect('login')
-    
+
 
     with db.connect() as conn : 
         with conn.cursor() as cur : 
             cur.execute("select mail from utilisateur where mail=%s", (select,))
             result=cur.fetchall()
-            
+
             print(result)
     if not result :
         abort(404)
@@ -245,16 +250,16 @@ def user(select) :
             for elem in cordee : 
                 cur.execute('select * from cordee where idcordee = %s', (elem[0],))
                 test=cur.fetchall()
-                
+
                 lst.append(test[0])
                 print(lst)
-                
+
     if session['mail']!=select :
         return render_template('user.html',content=result[0],guide=guide,cordee=cordee,lst=lst)
-    
+
 
     return render_template('userselected.html',content=result[0],guide=guide,cordee=cordee,lst=lst)  
-    
+
 
 @app.route("/usersetting", methods=["POST","GET"])
 def usersetting() :
@@ -263,8 +268,8 @@ def usersetting() :
     """
     if 'mail' not in session :
         return redirect('login')
-    
-    if request.method == "GET" : 
+
+    if request.method == "GET" :
         with db.connect() as conn :
             with conn.cursor(cursor_factory=psycopg2.extras.NamedTupleCursor) as cur :
                 cur.execute("select * from utilisateur where mail= %s;", (session["mail"],))
@@ -272,7 +277,7 @@ def usersetting() :
                 cur.execute("select * from difficulte;")
                 difficulte=cur.fetchall()
         return render_template('usersetting.html',content=content[0],difficulte=difficulte)
-    
+
     if request.method == "POST" :
         nom= request.form.get("nom")
         prenom = request.form.get("prenom")
@@ -281,49 +286,54 @@ def usersetting() :
         psw2=request.form.get("psw2")
         fr=request.form.get('niveau')
 
-        with db.connect() as conn : 
-            with conn.cursor() as cur : 
+        with db.connect() as conn :
+            with conn.cursor() as cur :
                 cur.execute("select mail from utilisateur where mail=%s; ",(email,))
                 resultemail = cur.fetchall()
-        
+
         if resultemail and email!=session['mail']:
             flash('Email déjà utilisé.', category='error')
             print(1)
         elif nom==None or prenom==None or email ==None or psw1==None or psw2==None :
             flash('veuillez remplir les valeurs')
             print(nom,prenom,email,psw1,psw2,fr)
-        elif psw1!=psw2 : 
+        elif psw1!=psw2 :
             flash('Les mots de passes ne sont pas les même', category='error')
             print(3)
-        elif (len(nom)>25 or len(nom)<2) : 
+        elif (len(nom)>25 or len(nom)<2) :
             print(4)
             flash('taille du nom incorrecte.', category='error')
         elif (len(prenom)>25 or len(prenom)<2) :
             print(5)
             flash('taille du prénom incorrecte.', category='error')
-        elif ('@' not in email) or len(email)<10 or len(email)>320 : 
+        elif ('@' not in email) or len(email)<10 or len(email)>320 :
             print(6)
             flash('email incorrecte', category='error')
-        elif len(psw1)>25 : 
+        elif len(psw1)>25 :
             print(7)
             flash('taille du mot de passe incorrecte', category='error')
-        elif fr not in ['1','2','3','4','5a','5b','5c','6a','6b','6c','7a','7b','7c','8a','8b','8c','9a','9c']:
+        elif fr not in ['1','2','3','4','5a','5b','5c','6a','6b',
+                        '6c','7a','7b','7c','8a','8b','8c','9a','9c']:
             print(8)
             flash('difficulté non existante',category='error')
-            
-        else : 
+
+        else :
             print(9)
             new_ser=User(user_id=email,nom=nom,prenom=prenom,password=psw1,difficulte=fr)
             if email==session["mail"] :
-                with db.connect() as conn : 
-                    with conn.cursor() as cur : 
-                        cur.execute("update utilisateur set mdp =%s, nom= %s, prenom =%s, fr=%s where mail=%s;",(password_ctx.hash(psw1),nom,prenom,fr,email,))
+                with db.connect() as conn :
+                    with conn.cursor() as cur :
+                        cur.execute(
+                            "update utilisateur set mdp =%s, nom= %s, prenom =%s, fr=%s where mail=%s;",
+                            (password_ctx.hash(psw1),nom,prenom,fr,email,))
                         conn.commit()
             else : 
                 with db.connect() as conn :
                     with conn.cursor() as cur :
                         cur.execute("DELETE FROM utilisateur WHERE mail=%s",(session["mail"],))
-                        cur.execute("INSERT INTO utilisateur (mail,mdp,nom,prenom,fr) VALUES (%s,%s,%s,%s,%s)",(new_ser.id,password_ctx.hash(new_ser.password) ,new_ser.nom,new_ser.prenom,new_ser.difficulte))
+                        cur.execute(
+                            "INSERT INTO utilisateur (mail,mdp,nom,prenom,fr) VALUES (%s,%s,%s,%s,%s)",
+                            (new_ser.id,password_ctx.hash(new_ser.password) ,new_ser.nom,new_ser.prenom,new_ser.difficulte))
                         conn.commit()
             flash('User modified')
             session['mail']=new_ser.id
@@ -332,7 +342,7 @@ def usersetting() :
 
 
 @app.errorhandler(404)
-def page_not_found(error) : 
+def page_not_found(error):
     """
     redirection pour l'erreur 404.
     """
@@ -340,13 +350,13 @@ def page_not_found(error) :
 
 
 @app.route('/voie/<select>')
-def voie(select) : 
+def voie(select):
     """
     Cette fonction permet de selectioner les voies indépendante
     """
     if 'mail' not in session :
         return redirect('login')
-    
+
     with db.connect() as conn :
         with conn.cursor(cursor_factory=psycopg2.extras.NamedTupleCursor) as cur : 
             cur.execute("select * from voie where idv=%s;", (select,))
@@ -365,11 +375,11 @@ def propositions() :
     """
     ceci va afficher la table des propositions
     """
-    if 'mail' not in session : 
+    if 'mail' not in session :
         return redirect('login')
     with db.connect() as conn :
         with conn.cursor(cursor_factory=psycopg2.extras.NamedTupleCursor) as cur : 
-            cur.execute("select * from proposition;") 
+            cur.execute("select * from proposition;")
             res=cur.fetchall()
             lst_nmbr_participant=[]
             lst_nom_site=[]
@@ -381,7 +391,12 @@ def propositions() :
                 lst_nom_site.append(nom[0])
                 lst_nmbr_participant.append(len(num))
         length=len(res)
-    return render_template('propositions.html',content=res,nbr=lst_nmbr_participant,nom=lst_nom_site,length=length)
+    return render_template(
+        'propositions.html',
+        content=res,
+        nbr=lst_nmbr_participant,
+        nom=lst_nom_site,
+        length=length)
 
 
 @app.route('/proposition/<select>')
@@ -391,7 +406,7 @@ def proposition(select) :
     """
     if 'mail' not in session :
         return redirect('login')
-    with db.connect() as conn : 
+    with db.connect() as conn :
         with conn.cursor(cursor_factory=psycopg2.extras.NamedTupleCursor) as cur :
             cur.execute("select * from proposition where idpropo=%s", (select,))
             res=cur.fetchall()
@@ -410,7 +425,7 @@ def proposition(select) :
 
     return render_template('proposition.html',content=res,nbr=num,nom=nom,participant=participant)
 
-    
+
 
 
 

@@ -52,7 +52,7 @@
 
 
           <div class="page_profile_icon">
-            {% if connected == False %} <!-- Si utilisateur est connecter, on lui montre le menu déroulant addapté-->
+            {%if 'mail' not in session%} <!-- Si utilisateur est connecter, on lui montre le menu déroulant addapté-->
 
             <div class="profile_icon_img" id="profile_button">
               <img
@@ -64,7 +64,7 @@
             </div>
             <ul class="deroulant_profile" type="none" id="profile_button_deroulant">
               <li>
-                <div onclick="location.href='connection';">
+                <div onclick="location.href='{{url_for('login',select=session['mail'])}}';">
                   <img
                   src="{{ url_for('static', filename = 'img/login_icon_day.png') }}"
                   class="icon"
@@ -75,7 +75,7 @@
                 </div>
               </li>
               <li>
-                <div onclick="location.href='inscription';">
+                <div onclick="location.href='{{url_for('register',select=session['mail'])}}';">
                   <img
                   src="{{ url_for('static', filename = 'img/signin_icon_day.png') }}"
                   class="icon"
@@ -181,9 +181,10 @@
 
     <script>//Script for light and dark mod
       let lightmod_stylesheet = document.getElementById( "lightmod" );
-      let lightmodbutton = document.getElementById( "toggle_switch" );let lightmodswitchimg = document.getElementById( "img_lightswitch" );
+      let lightmodbutton = document.getElementById( "toggle_switch" );
+      let lightmodswitchimg = document.getElementById( "img_lightswitch" );
       let defaultprofilepic = document.getElementById( "img_login_icon" );
-      {% if connected == False %}
+      {%if 'mail' not in session%}
       let icon_login = document.getElementById( "icon_login" );
       let icon_signin = document.getElementById( "icon_signin" );
       {% else %}
