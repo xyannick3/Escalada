@@ -28,9 +28,17 @@
 
         <div id="header_center">
           <div class="pages_index">
-            <p>
-              {%block title%}{%endblock%}
-            </p>
+            <nav style="text-align:center; background-color:LightGray">
+              <a href="/">Accueil</a> -
+              <a href={{url_for('difficulté')}}>difficultés</a> -
+              <a href="{{url_for('sites')}}">Liste des sites</a> -
+              <a href="{{url_for('login')}}">Se connecter</a> -
+              <a href="{{url_for('cordees')}}">Liste des cordées</a>  
+              {%if 'mail' in session%}
+              -
+              <a href="{{url_for('user',select=session['mail'])}}">page utilisateur</a>
+              {%endif%}
+            </nav>
           </div>
         </div>
 
@@ -64,7 +72,7 @@
             </div>
             <ul class="deroulant_profile" type="none" id="profile_button_deroulant">
               <li>
-                <div onclick="location.href='{{url_for('login',select=session['mail'])}}';">
+                <div onclick="location.href='{{url_for('login')}}';">
                   <img
                   src="{{ url_for('static', filename = 'img/login_icon_day.png') }}"
                   class="icon"
@@ -118,7 +126,7 @@
                 </div>
               </li>
               <li>
-                <div onclick="location.href='deconnection';">
+                <div onclick="location.href='disconnect';">
                   <img
                   src="{{ url_for('static', filename = 'img/logout_icon_day.png') }}"
                   class="icon"
@@ -138,17 +146,7 @@
       </div>
     </header>
     <div id="center_wrapper">
-      <nav style="text-align:center; background-color:LightGray">
-        <a href="/">Accueil</a> -
-        <a href={{url_for('difficulté')}}>difficultés</a> -
-        <a href="{{url_for('sites')}}">Liste des sites</a> -
-        <a href="{{url_for('login')}}">Se connecter</a> -
-        <a href="{{url_for('cordees')}}">Liste des cordées</a>  
-        {%if 'mail' in session%}
-        -
-        <a href="{{url_for('user',select=session['mail'])}}">page utilisateur</a>
-        {%endif%}
-      </nav>
+      
       <!--
         ##################################
         #                                #

@@ -90,8 +90,6 @@ def site(select) :
                 ,(select,))
             result=cur.fetchall()
     return render_template("site.html",content=result,ses=session)
-    #SELECT voie.nom, voie.longueur, voie.fr from siteesca, voie where (siteesca.idse= voie.idse) AND (siteesca.idse=X);
-
 
 
 @app.route("/register",methods=["GET","POST"])
@@ -107,8 +105,8 @@ def register() :
         psw2=request.form.get("psw2")
         fr=request.form.get('niveau')
 
-        with db.connect() as conn : 
-            with conn.cursor() as cur : 
+        with db.connect() as conn :
+            with conn.cursor() as cur :
                 cur.execute("select mail from utilisateur where mail=%s; ",(email,))
                 resultemail = cur.fetchall()
 
@@ -133,7 +131,8 @@ def register() :
         elif len(psw1)>25 :
             print(7)
             flash('taille du mot de passe incorrecte', category='error')
-        elif fr not in ['1','2','3','4','5a','5b','5c','6a','6b','6c','7a','7b','7c','8a','8b','8c','9a','9c']:
+        elif fr not in ['1','2','3','4','5a','5b','5c','6a','6b','6c',
+                        '7a','7b','7c','8a','8b','8c','9a','9c']:
             print(8)
             flash('difficulté non existante',category='error')
 
@@ -189,10 +188,10 @@ def cordees() :
     """
     affiche la liste des cordées.
     """
-    if 'mail' not in session : 
+    if 'mail' not in session :
         return redirect('login')
-    with db.connect() as conn : 
-        with conn.cursor(cursor_factory=psycopg2.extras.NamedTupleCursor) as cur : 
+    with db.connect() as conn :
+        with conn.cursor(cursor_factory=psycopg2.extras.NamedTupleCursor) as cur :
             cur.execute("select * from cordee;")
             result =  cur.fetchall()
 
@@ -207,7 +206,7 @@ def cordeeselect(select) :
         return redirect('login')
     nom=[]
     with db.connect() as conn :
-        with conn.cursor(cursor_factory=psycopg2.extras.NamedTupleCursor) as cur : 
+        with conn.cursor(cursor_factory=psycopg2.extras.NamedTupleCursor) as cur :
             cur.execute("select mail from partiec where idcordee=%s;",(select,))
             result = cur.fetchall()
             cur.execute("select * from cordee where idcordee=%s;",(select,))
@@ -230,16 +229,16 @@ def user(select) :
         return redirect('login')
 
 
-    with db.connect() as conn : 
-        with conn.cursor() as cur : 
+    with db.connect() as conn :
+        with conn.cursor() as cur :
             cur.execute("select mail from utilisateur where mail=%s", (select,))
             result=cur.fetchall()
 
             print(result)
     if not result :
         abort(404)
-    with db.connect() as conn : 
-        with conn.cursor(cursor_factory=psycopg2.extras.NamedTupleCursor) as cur: 
+    with db.connect() as conn :
+        with conn.cursor(cursor_factory=psycopg2.extras.NamedTupleCursor) as cur:
             cur.execute('select * from utilisateur where mail=%s', (select,))
             result=cur.fetchall()
             cur.execute('select * from estguidede where mail=%s', (select,))
@@ -247,7 +246,7 @@ def user(select) :
             cur.execute('select * from partiec where mail=%s', (select,))
             cordee=cur.fetchall()
             lst=[]
-            for elem in cordee : 
+            for elem in cordee :
                 cur.execute('select * from cordee where idcordee = %s', (elem[0],))
                 test=cur.fetchall()
 
@@ -258,8 +257,15 @@ def user(select) :
         return render_template('user.html',content=result[0],guide=guide,cordee=cordee,lst=lst)
 
 
-    return render_template('userselected.html',content=result[0],guide=guide,cordee=cordee,lst=lst)  
+    return render_template('userselected.html',content=result[0],guide=guide,cordee=cordee,lst=lst)
 
+@app.route('/disconnect')
+def disconnect():
+    """
+    permet de se déconnecter
+    """
+    session.pop('mail')
+    return redirect('login')
 
 @app.route("/usersetting", methods=["POST","GET"])
 def usersetting() :
@@ -294,7 +300,8 @@ def usersetting() :
         if resultemail and email!=session['mail']:
             flash('Email déjà utilisé.', category='error')
             print(1)
-        elif nom==None or prenom==None or email ==None or psw1==None or psw2==None :
+        elif (
+            nom==None or prenom==None or email ==None or psw1==None or psw2==None) :
             flash('veuillez remplir les valeurs')
             print(nom,prenom,email,psw1,psw2,fr)
         elif psw1!=psw2 :
@@ -333,12 +340,12 @@ def usersetting() :
                         cur.execute("DELETE FROM utilisateur WHERE mail=%s",(session["mail"],))
                         cur.execute(
                             "INSERT INTO utilisateur (mail,mdp,nom,prenom,fr) VALUES (%s,%s,%s,%s,%s)",
-                            (new_ser.id,password_ctx.hash(new_ser.password) ,new_ser.nom,new_ser.prenom,new_ser.difficulte))
+                            (new_ser.id,password_ctx.hash(new_ser.password) ,
+                             new_ser.nom,new_ser.prenom,new_ser.difficulte))
                         conn.commit()
             flash('User modified')
             session['mail']=new_ser.id
             return redirect(url_for('homepage',ses=session))
-    ...
 
 
 @app.errorhandler(404)
@@ -347,6 +354,7 @@ def page_not_found(error):
     redirection pour l'erreur 404.
     """
     return render_template('404.html'), 404
+
 
 
 @app.route('/voie/<select>')
@@ -399,7 +407,7 @@ def propositions() :
         length=length)
 
 
-@app.route('/proposition/<select>')
+@app.route('/proposition/<select>',methods=['POST','GET'])
 def proposition(select) :
     """
     ici on a l'affichage de la proposition
@@ -421,13 +429,17 @@ def proposition(select) :
             #     cur.execute("select * from utilisateur where mail=%s",(elem[0],))
 
             #     ...
-            print(participant)
 
     return render_template('proposition.html',content=res,nbr=num,nom=nom,participant=participant)
 
 
+@app.route('/join/<select>')
+def join(select) : 
+    """
+    permet de faire en sorte que l'utilisateur join une cordée 
+    """
 
-
+    pass
 
 @app.route("/test")
 
@@ -436,9 +448,12 @@ def test() :
     return render_template('home.html')
 
 
-@app.route("/transfer")
-def transfer():
-    ...
+@app.route("/transfer/<select>")
+def transfer(select):
+    """
+    Cette fonction assurera le transfert des données vers le menu cordée
+    """
+    pass
 
 if __name__ == "__main__" :
     app.run()

@@ -5,10 +5,10 @@
 <h2 style="text-align: center;">Page de proposition</h2>
 {%endblock%}
 {%block content%}
-<p>description : {{content["description"]}}</p>>
-<p>L'élévénement aura lieu le {{content["datep"]}}</p>
-<p>Il est organisé par {{content["mail"]}}</p>
-<p>le niveau de difficulté est <a href="{{url_for('difficulté',select=content["fr"])}}">{{content["fr"]}}</a></p>
+<p>description : {{content["description"]}}<br>
+L'élévénement aura lieu le {{content["datep"]}}<br>
+Il est organisé par {{content["mail"]}}<br>
+le niveau de difficulté est <a href="{{url_for('difficulté',select=content["fr"])}}">{{content["fr"]}}</a><br>
 
 <table>
     <thread>
@@ -25,4 +25,10 @@
             {%endfor%}
         </tbody>
 </table>
+
+{%if content['nb_max']>nbr%}
+
+Souhaitez vous rejoindre cette partie? cliquez<a href="{{url_for('join',select=content['idpropo'])}}"> ici </a>et contactez l'organisateur pour réserver votre place
+{%endif%}
+</p>
 {%endblock%}
