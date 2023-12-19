@@ -362,12 +362,54 @@ def voie(select) :
 
 @app.route("/propositions")
 def propositions() :
+    """
+    ceci va afficher la table des propositions
+    """
     if 'mail' not in session : 
         return redirect('login')
     with db.connect() as conn :
         with conn.cursor(cursor_factory=psycopg2.extras.NamedTupleCursor) as cur : 
-            cur.execute("select * from proposition") 
+            cur.execute("select * from proposition;") 
             res=cur.fetchall()
+            lst_nmbr_participant=[]
+            lst_nom_site=[]
+            for elem in res:
+                cur.execute("select * from participe where idpropo=%s; ",(elem[0],))
+                num=cur.fetchall()
+                cur.execute("select * from siteesca where idse=%s;",(elem[6],))
+                nom=cur.fetchall()
+                lst_nom_site.append(nom[0])
+                lst_nmbr_participant.append(len(num))
+        length=len(res)
+    return render_template('propositions.html',content=res,nbr=lst_nmbr_participant,nom=lst_nom_site,length=length)
+
+
+@app.route('/proposition/<select>')
+def proposition(select) :
+    """
+    ici on a l'affichage de la proposition
+    """
+    if 'mail' not in session :
+        return redirect('login')
+    with db.connect() as conn : 
+        with conn.cursor(cursor_factory=psycopg2.extras.NamedTupleCursor) as cur :
+            cur.execute("select * from proposition where idpropo=%s", (select,))
+            res=cur.fetchall()
+            res=res[0]
+            cur.execute("select * from siteesca where idse=%s;",(res[6],))
+            nom=cur.fetchall()
+            nom[0]=nom
+            cur.execute("select * from participe where idpropo=%s;",(res[0],))
+            participant=cur.fetchall()
+            num=len(participant)
+            # for elem in participant :
+            #     cur.execute("select * from utilisateur where mail=%s",(elem[0],))
+
+            #     ...
+            print(participant)
+
+    return render_template('proposition.html',content=res,nbr=num,nom=nom,participant=participant)
+
     
 
 

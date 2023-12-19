@@ -1,0 +1,28 @@
+{%extends "base.html"%}
+{%block pagetitle%}page test{%endblock%}
+
+{%block title%}
+<h2 style="text-align: center;">Page de proposition</h2>
+{%endblock%}
+{%block content%}
+<p>description : {{content["description"]}}</p>>
+<p>L'élévénement aura lieu le {{content["datep"]}}</p>
+<p>Il est organisé par {{content["mail"]}}</p>
+<p>le niveau de difficulté est <a href="{{url_for('difficulté',select=content["fr"])}}">{{content["fr"]}}</a></p>
+
+<table>
+    <thread>
+        <tr>
+            <th>participants</th>
+        </tr>
+
+    </thread>
+        <tbody>
+            {% for elem in participant%}
+                <tr>
+                    <td><div onmouseout="this.style.backgroundColor='#ffffff'" onmouseover="this.style.backgroundColor='#e74c3c'"  onclick="location.href =  '{{url_for("user", select=elem["mail"])}}'"> {{elem["mail"]}}</div></td>
+                </tr>
+            {%endfor%}
+        </tbody>
+</table>
+{%endblock%}
