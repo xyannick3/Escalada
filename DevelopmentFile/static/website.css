@@ -89,6 +89,8 @@ header {
 .pages_index {
     width:max-content;
     overflow-y: hidden;
+    padding-left: 2rem;
+    padding-right: 2rem;
 }
 
 .pages_index > nav {
@@ -105,9 +107,10 @@ header {
 
 .pages_index > nav > div:hover {
     display: inline-block;
-    color: var(--text-accent);
-    font-size:130%;
+    font-size:120%;
     font-weight: bold;
+    text-decoration: underline;
+    transform: scale(1.05, 1.05);
 }
 
 /* Gestion du menu déroulant de connection */
