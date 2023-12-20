@@ -152,18 +152,7 @@
         ##################################
       -->
       {%block content%}{%endblock%}
-      {%with messages = get_flashed_messages(with_categories=True)%}
-        {%if messages%}
-              {%for category,messages in messages%}
-              {%if category == "error"%}
-                <div style="color:red;" role="alert">
-                  {{messages}}
-                  
-                </div>
-              {%endif%}
-          {%endfor%}
-        {%endif%}
-      {%endwith%}
+
     </div>
 
     <footer>
