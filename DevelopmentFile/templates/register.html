@@ -23,5 +23,17 @@
         <button class="btn btn-primary" type= "submit">S'inscrire</button>
     </form>
     <p onclick="location.href='{{url_for('login')}}';">déjà inscript?</p>
+    {%with messages = get_flashed_messages(with_categories=True)%}
+    {%if messages%}
+          {%for category,messages in messages%}
+          {%if category == "error"%}
+            <div style="color:red;" role="alert">
+              {{messages}}
+              
+            </div>
+          {%endif%}
+      {%endfor%}
+    {%endif%}
+  {%endwith%}
 </div>
 {%endblock%}
