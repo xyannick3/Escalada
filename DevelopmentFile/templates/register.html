@@ -22,7 +22,6 @@
         <input type="password" id="psw2" name="psw2" class= "form-control" placeholder="Confirmez Mot De Passe"><br>
         <button class="btn btn-primary" type= "submit">S'inscrire</button>
     </form>
-    <p onclick="location.href='{{url_for('login')}}';">déjà inscript?</p>
     {%with messages = get_flashed_messages(with_categories=True)%}
     {%if messages%}
           {%for category,messages in messages%}
@@ -35,5 +34,6 @@
       {%endfor%}
     {%endif%}
   {%endwith%}
+  <p onclick="location.href='{{url_for('login')}}';">déjà inscript?</p>
 </div>
 {%endblock%}
