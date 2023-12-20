@@ -4,25 +4,24 @@
 
 {%block content%}
 <div id="login_wrapper">
-
-<form action="#" method="post">
+    <form action="#" method="post">
         <p>Inscrivez-vous</p>
         <div class="separation_bar"></div>
-        <p><input type="text" id="nom"name="nom" placeholder="Nom de l'utilisateur"></p>
-        <p><input type="text" id="prenom"name="prenom" placeholder="prenom de l'utilisateur"></p>
-        <p><input type="text" id="id"name="id" placeholder="Email"></p>
+        <input type="text" id="nom"name="nom" placeholder="Nom de l'utilisateur"><br>
+        <input type="text" id="prenom"name="prenom" placeholder="prenom de l'utilisateur"><br>
+        <input type="text" id="id"name="id" placeholder="Email"><br>
         
         <label for = "niveau">choisisez votre niveau</label>
         <div class="separation_bar"></div>
         <select id="niveau" name="niveau">
-        {%for item in diff%}
-        <option value="{{ item['fr'] }}">{{item['fr']}}</option>
-        {%endfor%}
-        </select>
-        <p><input type="password" id="psw1" name="psw1" class= "form-control" placeholder="Mot De Passe"></p>
-        <p><input type="password" id="psw2" name="psw2" class= "form-control" placeholder="Confirmez Mot De Passe"></p>
-        <div><button class="btn btn-primary" type= "submit">S'inscrire</button></div>
+            {%for item in diff%}
+            <option value="{{ item['fr'] }}">{{item['fr']}}</option>
+            {%endfor%}
+        </select><br>
+        <input type="password" id="psw1" name="psw1" class= "form-control" placeholder="Mot De Passe"><br>
+        <input type="password" id="psw2" name="psw2" class= "form-control" placeholder="Confirmez Mot De Passe"><br>
+        <button class="btn btn-primary" type= "submit">S'inscrire</button>
     </form>
-    <a href={{url_for('login')}}>déjà inscript?</a>
+    <p onclick="location.href='{{url_for('login')}}';">déjà inscript?</p>
 </div>
 {%endblock%}

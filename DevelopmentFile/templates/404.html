@@ -3,5 +3,8 @@
 {%block title%}<h2 style="align-content: center;">ERREUR  : 404</h2>{%endblock%}
 
 {%block content%}
-<img src="{{url_for('static', filename='img/error_404.png')}}" alt = 'Erreur 404'>
+<div id="error_page_wrapper">
+    <img src="{{url_for('static', filename='img/error_404.png')}}" alt = 'Erreur 404'>
+    <p>Mmmmhhhh... Il semblerait qu'il n'y ai rien à grimper par ici.</p>
+</div>
 {%endblock%}

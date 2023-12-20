@@ -1,6 +1,7 @@
 /*File containing the color codes for the night theme*/
 :root {
     --text: #edf7de;
+    --text-accent: #172108;
     --background: #1e1c20;
     --primary: #4c208d;
     --secondary: #3c3b3d;

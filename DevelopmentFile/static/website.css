@@ -91,6 +91,25 @@ header {
     overflow-y: hidden;
 }
 
+.pages_index > nav {
+    text-align:center;
+    font-size:xx-large;
+    font-weight: bold;
+}
+
+.pages_index > nav > div {
+    display: inline-block;
+    font-size:120%;
+    font-weight: bold;
+}
+
+.pages_index > nav > div:hover {
+    display: inline-block;
+    color: var(--text-accent);
+    font-size:130%;
+    font-weight: bold;
+}
+
 /* Gestion du menu déroulant de connection */
 div.page_profile_icon {
     float: right;
@@ -250,6 +269,27 @@ img.logo {
     box-sizing: border-box;
 }
 
+#login_wrapper > form > select {
+    position:relative;
+    margin: 0.2rem;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+#login_wrapper > form > button {
+    margin: 0.5rem;
+    padding: 0.25rem;
+    border-radius: 0.75rem;
+    border: 1px solid #00000000;
+    box-sizing: border-box;
+    color: var(--text);
+    font-size: larger;
+    background-color: var(--primary);
+    box-shadow: 5px 5px 5px 0px #00000088;
+}
+
 #login_wrapper > form > .separation_bar {
     position: relative;
     height: 0.3rem;
@@ -261,6 +301,37 @@ img.logo {
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;
 }
+
+#login_wrapper > p {
+    font-style: italic;
+    text-decoration: underline;
+}
+
+#login_wrapper > p:hover {
+    font-weight: bolder;
+    font-style: italic;
+    text-decoration: underline;
+}
+
+#login_message_fail {
+    font-weight: bold;
+    color: rgb(200, 20, 20);
+}
+
+#error_page_wrapper {
+    position: relative;
+    width: fit-content;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+}
+
+#error_page_wrapper > p {
+    position: relative;
+    left: 25%;
+}
+
 
 
 
