@@ -219,7 +219,7 @@ def cordeeselect(select) :
                 nom.append((item[0],f"{res[0]} {res[1]}"))
     return render_template('cordee.html', content=nom,cordee=cordee[0])
 
-@app.route("/user/<select>")
+@app.route("/user/<select>", methods=["POST","GET"])
 def user(select) :
     """
     affiche la fiche d'un utilisateur, si l'utilisateur est l'utilisateur connecté, 
@@ -228,6 +228,13 @@ def user(select) :
     if 'mail' not in session :
         return redirect('login')
 
+    if request.method == 'POST' :
+        localite=request.form.get("localite")
+        with db.connect() as conn :
+            with conn.cursor() as cur:
+                cur.execute("INSERT INTO estguidede (mail,codepostal) VALUES (%s,%s);",
+                (session['mail'],localite,))
+            conn.commit()
 
     with db.connect() as conn :
         with conn.cursor() as cur :
@@ -239,6 +246,8 @@ def user(select) :
         abort(404)
     with db.connect() as conn :
         with conn.cursor(cursor_factory=psycopg2.extras.NamedTupleCursor) as cur:
+            cur.execute('select * from localite;')
+            localite=cur.fetchall()
             cur.execute('select * from utilisateur where mail=%s', (select,))
             result=cur.fetchall()
             cur.execute('select * from estguidede where mail=%s', (select,))
@@ -257,7 +266,7 @@ def user(select) :
         return render_template('user.html',content=result[0],guide=guide,cordee=cordee,lst=lst)
 
 
-    return render_template('userselected.html',content=result[0],guide=guide,cordee=cordee,lst=lst)
+    return render_template('userselected.html',content=result[0],guide=guide,cordee=cordee,lst=lst,localite=localite)
 
 @app.route('/disconnect')
 def disconnect():
@@ -386,7 +395,10 @@ def propositions() :
     if 'mail' not in session :
         return redirect('login')
     with db.connect() as conn :
-        with conn.cursor(cursor_factory=psycopg2.extras.NamedTupleCursor) as cur : 
+        with conn.cursor(cursor_factory=psycopg2.extras.NamedTupleCursor) as cur :
+            cur.execute('select * from estguidede where mail= %s;', (session['mail'],))
+            estguide=cur.fetchall()
+
             cur.execute("select * from proposition;")
             res=cur.fetchall()
             lst_nmbr_participant=[]
@@ -404,7 +416,8 @@ def propositions() :
         content=res,
         nbr=lst_nmbr_participant,
         nom=lst_nom_site,
-        length=length)
+        length=length,
+        estguide=estguide)
 
 
 @app.route('/proposition/<select>',methods=['POST','GET'])
@@ -475,6 +488,14 @@ def remove(idpropo,usssr) :
             cur.execute("delete from paricipe where mail=%s;",(usssr,))
         conn.commit()
     return redirect(url_for('proposition',select=idpropo))
+
+@app.route("/createpropo")
+def create_propo() :
+    """
+    permet de créer une proposition si l'utilisateur est un guide
+    """
+
+    ...
 
 
 @app.route("/test")

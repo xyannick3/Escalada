@@ -3,14 +3,15 @@
 {%block title%}<h2>test get method</h2>{%endblock%}
 
 {%block content%}
-<form action="#" method="post">
+<div id="login_wrapper">
     <form action="#" method="post">
         <p>Identifiez vous</p>
-        <p><input type="text" id="id"name="id" placeholder="Email"></p>
-        <p><input type="password" id="psw" name="psw" class= "form-control" placeholder="Mot De Passe"></p>
-        <div><button class="btn btn-primary" type= "submit">Envoyer</button></div>
+        <div class="separation_bar"></div>
+        <input type="text" id="id"name="id" placeholder="Email"><br>
+        <input type="password" id="psw" name="psw" class= "form-control" placeholder="Mot De Passe"><br>
+        <div><button class="btn btn-primary" type= "submit">Envoyer</button></div><br>
     </form>
     <p>mot de passe incorrect</p>
-</form>
-<a href={{url_for('register')}}>Pas encore inscript?</a>
+    <a href={{url_for('register')}}>Pas encore inscript?</a>
+</div>
 {%endblock%}

@@ -35,4 +35,7 @@
         {%endfor%}
     </tbody>
 </table>
+{%if estguide%}
+<p>vous êtes un guide, si vous souhaitez créer une proposition cliquez <a href="{{url_for('create_propo')}}">ici</a></p>
+{%endif%}
 {%endblock%}

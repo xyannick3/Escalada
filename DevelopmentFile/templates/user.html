@@ -3,12 +3,12 @@
 {%block title%}<h2> Fiche de {{content["nom"]}} {{content["prenom"]}} </h2>{%endblock%}
 
 {%block content%}
-    <p>Identifiant : {{content["mail"]}}  </p>
-    <p>difficulté : {{content["fr"]}}</p>
+    <p>Identifiant : {{content["mail"]}}  <br>
+    difficulté : {{content["fr"]}}<br>
     
 
     {%if guide%}
-    <p>Cet utilisateur est un moniteur! contactez le si vous avez besoin de conseil </p>
+    Cet utilisateur est un moniteur! contactez le si vous avez besoin de conseil <br>
     {%endif%}
 
 
@@ -19,6 +19,7 @@
     <table>
         <td>test {{elem["nomcordee"]}}</td>
     </table>
+    </p>
     {%endfor%}
     {%endif%}
 {%endblock%}

@@ -3,14 +3,27 @@
 {%block title%}<h1> Votre espace personnel </h1>{%endblock%}
 
 {%block content%}
-    <p>Identifiant : {{content["mail"]}}  </p>
-    <p>difficulté : {{content["fr"]}}</p>
+    <p>Identifiant : {{content["mail"]}}  <br>
+    difficulté : {{content["fr"]}}<br>
     
 
     {%if guide%}
-    <p>Cet utilisateur est un moniteur! contactez le si vous avez besoin de conseil </p>
+    Vous êtes guide, vous pouvez créer des propositions<br>
+    {%else%}
+    <div class="separation_bar"></div>
+    Formulaire pour rejoindre l'équipe des guides.
+    <form method="post">
+        <p>Où souhaitez vous opérer?</p>
+        <select id="localite" name="localite">
+            {%for item in localite%}
+            <option value="{{item['codepostal']}}">{{item['nom']}}</option>
+            {%endfor%}
+        </select>
+        <div><button class="btn btn-primary" type="submit">postuler</button></div>
+        
+    </form>
     {%endif%}
-
+    </p>
     {%if lst!=[]%}
     <h2>l'historique de cordée de l'utilisateur : </h2>
     {%for elem in lst%}
@@ -19,6 +32,5 @@
     </table>
     {%endfor%}
     {%endif%}
-
-    <p><a href="{{url_for('usersetting')}}">Souhaitez vous modifier les paramètres de votre compte?</a></p>
+    <p><br><a href="{{url_for('usersetting')}}">Souhaitez vous modifier les paramètres de votre compte?</a></p>
 {%endblock%}
