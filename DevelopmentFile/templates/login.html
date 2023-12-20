@@ -8,10 +8,10 @@
         <p>Identifiez vous</p>
         <div class="separation_bar"></div>
         <input type="text" id="id"name="id" placeholder="Email"><br>
-        <input type="password" id="psw" name="psw" class= "form-control" placeholder="Mot De Passe"><br>
-        <div><button class="btn btn-primary" type= "submit">Envoyer</button></div><br>
+        <input type="password" id="psw" name="psw" class= "form-control" placeholder="Mot De Passe"><br><br>
+        <button class="btn btn-primary" type= "submit">Envoyer</button>
     </form>
-
-    <a href={{url_for('register')}}>Pas encore inscript?</a>
+    <p></p>
+    <p onclick="location.href='{{url_for('register')}}';">Pas encore inscript?</p>
 </div>
 {%endblock%}

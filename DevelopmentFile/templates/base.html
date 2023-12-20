@@ -28,17 +28,12 @@
 
         <div id="header_center">
           <div class="pages_index">
-            <nav style="text-align:center; background-color:LightGray">
-              <a href="/">Accueil</a> -
-              <a href={{url_for('difficulté')}}>difficultés</a> -
-              <a href="{{url_for('sites')}}">Liste des sites</a> -
-              <a href="{{url_for('login')}}">Se connecter</a> -
-              <a href="{{url_for('cordees')}}">Liste des cordées</a> -
-              <a href="{{url_for('propositions')}}">Propositions</a> 
-              {%if 'mail' in session%}
-              -
-              <a href="{{url_for('user',select=session['mail'])}}">page utilisateur</a>
-              {%endif%}
+            <nav>
+              <div >Accueil</div> -
+              <div onclick="location.href='{{url_for('difficulté')}}';">difficultés</div> -
+              <div onclick="location.href='{{url_for('sites')}}';">Liste des sites</div> -
+              <div onclick="location.href='{{url_for('cordees')}}';">Liste des cordées</div> -
+              <div onclick="location.href='{{url_for('propositions')}}';">Propositions</div>
             </nav>
           </div>
         </div>
@@ -61,7 +56,7 @@
 
 
           <div class="page_profile_icon">
-            {%if 'mail' not in session%} <!-- Si utilisateur est connecter, on lui montre le menu déroulant addapté-->
+            {% if 'mail' not in session %} <!-- Si utilisateur est connecter, on lui montre le menu déroulant addapté-->
 
             <div class="profile_icon_img" id="profile_button">
               <img
@@ -183,7 +178,7 @@
       let lightmodbutton = document.getElementById( "toggle_switch" );
       let lightmodswitchimg = document.getElementById( "img_lightswitch" );
       let defaultprofilepic = document.getElementById( "img_login_icon" );
-      {%if 'mail' not in session%}
+      {% if 'mail' not in session %}
       let icon_login = document.getElementById( "icon_login" );
       let icon_signin = document.getElementById( "icon_signin" );
       {% else %}
@@ -211,7 +206,7 @@
         if (n == 1) {
           lightmod_stylesheet.href = "{{ url_for('static', filename = 'website_night.css')}}";
           lightmodswitchimg.src = "{{ url_for('static', filename = 'img/lightmod_icon_night.png')}}";
-          {% if connected == False %}
+          {% if 'mail' not in session %}
           defaultprofilepic.src = "{{ url_for('static', filename = 'img/default_user_account_icon_night.png')}}";
           icon_login.src = "{{ url_for('static', filename = 'img/login_icon_night.png')}}";
           icon_signin.src = "{{ url_for('static', filename = 'img/signin_icon_night.png')}}";
@@ -222,7 +217,7 @@
         } else if (n == 0) {
           lightmod_stylesheet.href = "{{ url_for('static', filename = 'website_day.css')}}";
           lightmodswitchimg.src="{{ url_for('static', filename = 'img/lightmod_icon_day.png')}}";
-          {% if connected == False %}
+          {% if 'mail' not in session %}
           defaultprofilepic.src="{{ url_for('static', filename = 'img/default_user_account_icon_day.png')}}";
           icon_login.src="{{ url_for('static', filename = 'img/login_icon_day.png')}}";
           icon_signin.src="{{ url_for('static', filename = 'img/signin_icon_day.png')}}";

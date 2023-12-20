@@ -1,6 +1,7 @@
 /*File containing the color codes for the light theme*/
 :root {
     --text: #172108;
+    --text-accent: #edf7de;
     --background: #fdfefb;
     --primary: #9d72df;
     --secondary: #6c6c71;
