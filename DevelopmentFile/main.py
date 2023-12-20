@@ -113,7 +113,11 @@ def register() :
         if resultemail :
             flash('Email déjà utilisé.', category='error')
             print(1)
-        elif nom==None or prenom==None or email ==None or psw1==None or psw2==None :
+        elif ((nom is None) or
+              (prenom is None) or
+              (email is None) or
+              (psw1 is None) or
+              (psw2 is None)) :
             flash('veuillez remplir les valeurs')
             print(nom,prenom,email,psw1,psw2,fr)
         elif psw1!=psw2 : 
