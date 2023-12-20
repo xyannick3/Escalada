@@ -471,21 +471,22 @@ def join(select) :
                 return render_template('join-success.html')
         return render_template('join-failure.html')
 
-@app.route("/remove/<idpropo>/<usssr>")
-def remove(idpropo,usssr) :
+@app.route("/<email>/<idpropo>")
+def remove(email,idpropo) :
     """
-    permet de supprimer un élément
+    pour enlever un joueur
     """
+    
     if 'mail' not in session :
         return redirect('login')
     with db.connect() as conn :
         with conn.cursor(cursor_factory=psycopg2.extras.NamedTupleCursor) as cur :
-            cur.execute("select mail from proposition where idpropo=%s;", (session['mail'],))
+            cur.execute("select mail from proposition where idpropo=%s;", (idpropo,))
             mail=cur.fetchall()
-            if session['mail']!=mail :
-                print(test)
-                return redirect('page_not_found')
-            cur.execute("delete from paricipe where mail=%s;",(usssr,))
+            if session['mail']!=mail[0][0] :
+                print(session['mail'],"%",mail[0][0],'%')
+                return redirect(url_for('proposition',select=idpropo))
+            cur.execute("delete from participe where mail=%s;",(email,))
         conn.commit()
     return redirect(url_for('proposition',select=idpropo))
 
