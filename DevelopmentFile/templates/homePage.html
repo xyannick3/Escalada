@@ -9,5 +9,10 @@
 
 
 {%block content%}
-<p>Bonjour!</p>
+<p>
+    Bienvenue dans le site d'organisation de l'association nationale d'escalade !<br>
+    Pour pouvoir accéder au reste du site, <a href="{{url_for('login')}}">connectez-vous</a>.<br>
+    Si vous n'avez pas encore de compte chez nous <a href="{{url_for('register')}}">inscrivez-vous</a>.<br>
+    Une fois connecté vous pourrez rejoindre des propositions de cordées, vous renseigner sur les sites, ainsi qu'accéder aux archives de cordée.
+</p>
 {%endblock%}
