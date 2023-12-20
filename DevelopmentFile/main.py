@@ -412,6 +412,8 @@ def proposition(select) :
     """
     ici on a l'affichage de la proposition
     """
+    session['mail']='leroux.leo32@yahoo.fr'
+    print(session['mail'])
     if 'mail' not in session :
         return redirect('login')
     with db.connect() as conn :
@@ -434,12 +436,46 @@ def proposition(select) :
 
 
 @app.route('/join/<select>')
-def join(select) : 
+def join(select) :
     """
     permet de faire en sorte que l'utilisateur join une cordée 
     """
+    print(select)
+    if 'mail' not in session :
+        return redirect('login')
+    with db.connect() as conn :
+        with conn.cursor(cursor_factory=psycopg2.extras.NamedTupleCursor) as cur :
+            cur.execute("select * from proposition where idpropo=%s;", (select,))
+            res=cur.fetchall()
+            res=res[0]
+            cur.execute("select * from participe where idpropo=%s;", (select,))
+            participant=cur.fetchall()
+            num=len(participant)
+            if num<res[3] :
+                cur.execute("insert into participe (mail,idpropo) values (%s,%s);",
+                            (session['mail'],select,))
+                conn.commit()
+                return render_template('join-success.html')
+        return render_template('join-failure.html')
 
-    pass
+@app.route("/remove/<idpropo>/<usssr>")
+def remove(idpropo,usssr) :
+    """
+    permet de supprimer un élément
+    """
+    if 'mail' not in session :
+        return redirect('login')
+    with db.connect() as conn :
+        with conn.cursor(cursor_factory=psycopg2.extras.NamedTupleCursor) as cur :
+            cur.execute("select mail from proposition where idpropo=%s;", (session['mail'],))
+            mail=cur.fetchall()
+            if session['mail']!=mail :
+                print(test)
+                return redirect('page_not_found')
+            cur.execute("delete from paricipe where mail=%s;",(usssr,))
+        conn.commit()
+    return redirect(url_for('proposition',select=idpropo))
+
 
 @app.route("/test")
 

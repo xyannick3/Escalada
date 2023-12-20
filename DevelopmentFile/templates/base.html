@@ -33,7 +33,8 @@
               <a href={{url_for('difficulté')}}>difficultés</a> -
               <a href="{{url_for('sites')}}">Liste des sites</a> -
               <a href="{{url_for('login')}}">Se connecter</a> -
-              <a href="{{url_for('cordees')}}">Liste des cordées</a>  
+              <a href="{{url_for('cordees')}}">Liste des cordées</a> -
+              <a href="{{url_for('propositions')}}">Propositions</a> 
               {%if 'mail' in session%}
               -
               <a href="{{url_for('user',select=session['mail'])}}">page utilisateur</a>
