@@ -24,12 +24,12 @@
             <tr>
                 <td>{{content[i]["description"]}}</td>
                 <td>{{content[i]["datep"]}}</td>
-                <td><div onmouseout="this.style.backgroundColor='#ffffff'" onmouseover="this.style.backgroundColor='#e74c3c'"  onclick="location.href =  '{{url_for("user", select=content[i]["mail"])}}'">{{content[i]["mail"]}}</div></td>
-                <td><div onmouseout="this.style.backgroundColor='#ffffff'" onmouseover="this.style.backgroundColor='#e74c3c'"  onclick="location.href =  '{{url_for("difficulté", select=content[i]["fr"])}}'">{{content[i]["fr"]}}</div></td>
-                <td><div onmouseout="this.style.backgroundColor='#ffffff'" onmouseover="this.style.backgroundColor='#e74c3c'"  onclick="location.href =  '{{url_for("user", select=content[i]["mail"])}}'">{{content[i]["mail"]}}</div></td>
-                <td><div onmouseout="this.style.backgroundColor='#ffffff'" onmouseover="this.style.backgroundColor='#e74c3c'" onclick = "location.href='{{url_for("site", select=content[i]["idse"])}}';">{{nom[i]["nom"]}}</div></td>
+                <td><div onmouseout="this.style.backgroundColor='var(--background)'" onmouseover="this.style.backgroundColor='#e74c3c'"  onclick="location.href =  '{{url_for("user", select=content[i]["mail"])}}'">{{content[i]["mail"]}}</div></td>
+                <td><div onmouseout="this.style.backgroundColor='var(--background)'" onmouseover="this.style.backgroundColor='#e74c3c'"  onclick="location.href =  '{{url_for("difficulté", select=content[i]["fr"])}}'">{{content[i]["fr"]}}</div></td>
+                <td><div onmouseout="this.style.backgroundColor='var(--background)'" onmouseover="this.style.backgroundColor='#e74c3c'"  onclick="location.href =  '{{url_for("user", select=content[i]["mail"])}}'">{{content[i]["mail"]}}</div></td>
+                <td><div onmouseout="this.style.backgroundColor='var(--background)'" onmouseover="this.style.backgroundColor='#e74c3c'" onclick = "location.href='{{url_for("site", select=content[i]["idse"])}}';">{{nom[i]["nom"]}}</div></td>
                 <td>{{nbr[i]}}/{{content[i]['nb_max']}}</td>
-                <td><div onmouseout="this.style.backgroundColor='#ffffff'" onmouseover="this.style.backgroundColor='#e74c3c'" onclick = "location.href='{{url_for("proposition", select=content[i]["idpropo"])}}';">ici!</div></td>
+                <td><div onmouseout="this.style.backgroundColor='var(--background)'" onmouseover="this.style.backgroundColor='#e74c3c'" onclick = "location.href='{{url_for("proposition", select=content[i]["idpropo"])}}';">ici!</div></td>
 
             </tr>
         {%endfor%}

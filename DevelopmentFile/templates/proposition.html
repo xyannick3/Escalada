@@ -23,9 +23,9 @@ le niveau de difficulté est <a href="{{url_for('difficulté',select=content["fr
         <tbody>
             {% for elem in participant%}
                 <tr>
-                    <td><div onmouseout="this.style.backgroundColor='#ffffff'" onmouseover="this.style.backgroundColor='#e74c3c'"  onclick="location.href =  '{{url_for("user", select=elem["mail"])}}'"> {{elem["mail"]}}</div></td>
+                    <td><div onmouseout="this.style.backgroundColor='var(--background)'" onmouseover="this.style.backgroundColor='#e74c3c'"  onclick="location.href =  '{{url_for("user", select=elem["mail"])}}'"> {{elem["mail"]}}</div></td>
                     {%if session["mail"]==content["mail"]%}
-                    <td><div onmouseout="this.style.backgroundColor='#ffffff'" onmouseover="this.style.backgroundColor='#e74c3c'"  onclick="location.href =  '{{url_for("remove", idpropo=content['idpropo'] ,usssr=elem['mail'])}}'"><a href="{{url_for("remove", idpropo=content['idpropo'] ,usssr=elem['mail'])}}">x</a></div></td>
+                    <td><div onmouseout="this.style.backgroundColor='var(--background)'" onmouseover="this.style.backgroundColor='#e74c3c'"  onclick="location.href =  '{{url_for("remove", idpropo=content['idpropo'] ,usssr=elem['mail'])}}'"><a href="{{url_for("remove", idpropo=content['idpropo'] ,usssr=elem['mail'])}}">x</a></div></td>
                     {%endif%}
                 </tr>
             {%endfor%}
