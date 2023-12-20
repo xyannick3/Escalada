@@ -31,8 +31,8 @@ def homepage() :
     """
     permet d'afficher la page principale 
     """
-    if 'mail' not in session :
-        return redirect('login')
+    # if 'mail' not in session :
+    #     return redirect('login')
     return render_template("homePage.html",ses=session)
 
 login_manager=LoginManager()
