@@ -1,0 +1,27 @@
+{%extends "base.html"%}
+{%block pagetitle%}test get method{%endblock%}
+{%block title%}<!-- <h3>test get method</h3> -->{%endblock%}
+
+{%block content%}
+<div id="login_wrapper">
+    <form action="#" method="post">
+        <p>Veuillez remplir le formulaire</p>
+        <div class="separation_bar"></div>
+        site : <select id="site" name="site">
+            {%for item in sites%}
+            <option value="{{item['idse']}}">{{item['nom']}}</option>
+            {%endfor%}
+        </select>
+        <input type="text" id="description"name="description" placeholder="courte description."><br>
+        <input type="date" id="datep" name="datep" pattern="\d{4}-\d{2}-\d{2}" required><br>
+        <input type="number" id="nb_max" name="nb_max" placeholder="effective max"><br><br>
+        difficulté conseillée : <select id="difficulte" name="difficulte">
+            {%for item in diff%}
+            <option value="{{item['fr']}}">{{item['fr']}}</option>
+            {%endfor%}
+        </select>
+        <button class="btn btn-primary" type= "submit">Envoyer</button>
+    </form>
+    <p></p>
+</div>
+{%endblock%}

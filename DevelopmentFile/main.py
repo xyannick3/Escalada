@@ -494,14 +494,40 @@ def remove(email,idpropo) :
         conn.commit()
     return redirect(url_for('proposition',select=idpropo))
 
-@app.route("/createpropo")
+@app.route("/createpropo", methods=['GET','POST'])
 def create_propo() :
     """
     permet de créer une proposition si l'utilisateur est un guide
     """
-
-    ...
-
+    if 'mail' not in session :
+        redirect('login')
+    if request.method=="GET" :
+        with db.connect() as conn :
+            with conn.cursor(cursor_factory=psycopg2.extras.NamedTupleCursor) as cur :
+                cur.execute('select * from estguidede where mail=%s;',(session['mail'],))
+                estguide=cur.fetchall()
+                if not estguide :
+                    return redirect('page_not_found')
+                cur.execute('select * from siteesca where codepostal=%s;',(estguide[0][1],))
+                sit=cur.fetchall()
+                cur.execute('select * from difficulte;')
+                diff=cur.fetchall()
+        return render_template('createpropo.html',sites=sit,diff=diff)
+    
+    if request.method=='POST' :
+        sit= request.form.get('site')
+        description=request.form.get('description')
+        date=request.form.get('datep')
+        nb_max=request.form.get('nb_max')
+        diff=request.form.get('difficulte')
+        with db.connect() as conn : 
+            with conn.cursor(cursor_factory=psycopg2.extras.NamedTupleCursor) as cur : 
+                cur.execute('insert into proposition (description,datep,nb_max,mail,fr,idse) values(%s,%s,%s,%s,%s,%s);',
+                            (description,date,nb_max,session['mail'],diff,sit,))
+            conn.commit()
+        return redirect('propositions')
+        
+    
 
 @app.route("/test")
 
@@ -510,12 +536,14 @@ def test() :
     return render_template('home.html')
 
 
-@app.route("/transfer/<select>")
+@app.route("/transfer/<select>", methods=['GET','POST'])
 def transfer(select):
     """
     Cette fonction assurera le transfert des données vers le menu cordée
     """
-    pass
+    if 'mail' not in session : 
+        return redirect('login')
+
 
 if __name__ == "__main__" :
     app.run()
