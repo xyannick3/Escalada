@@ -64,11 +64,12 @@ header {
 
 #header_center {
     position: absolute;
-    left: 50%;
+    left: 7rem;
+    right: 9rem;
     top: 50%;
     animation-duration: 0s;
     animation: none;
-    transform: translate(-50%, -50%);
+    transform: translate(0, -50%);
     align-content: center;
     justify-content: center;
 }
@@ -87,15 +88,15 @@ header {
 }
 
 .pages_index {
-    width:max-content;
     overflow-y: hidden;
     padding-left: 2rem;
     padding-right: 2rem;
+    left: 50%;
+    font-size: 1.6vw;
 }
 
 .pages_index > nav {
     text-align:center;
-    font-size:1.5rem;
     font-weight: bold;
 }
 
@@ -107,7 +108,6 @@ header {
 
 .pages_index > nav > div:hover {
     display: inline-block;
-    font-size:120%;
     font-weight: bold;
     text-decoration: underline;
     transform: scale(1.05, 1.05);
