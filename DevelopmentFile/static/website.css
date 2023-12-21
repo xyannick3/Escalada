@@ -349,10 +349,17 @@ img.logo {
     
 }
 
-.table_wrapper > table > tbody > tr > td {
+.table_wrapper > table > tbody > tr > td:not(:has(div)){
     padding-top: 0.25rem;
     padding-right: 0.25rem;
     padding-left: 0.25rem;
+}
+
+.table_wrapper > table > tbody > tr > td > div {
+    padding-top: 0.25rem;
+    padding-right: 0.25rem;
+    padding-left: 0.25rem;
+    border-radius: 0.4rem;
 }
 
 .table_wrapper > table > tbody > tr:nth-child(even) > td{
