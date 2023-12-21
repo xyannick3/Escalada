@@ -247,7 +247,8 @@ img.logo {
     bottom: 5rem;
     width: 100%;
     min-height: calc(100% - 8rem);
-    margin: 1rem;
+    padding: 1rem;
+    overflow: scroll;
 }
 
 #login_wrapper {
@@ -344,7 +345,7 @@ footer {
     position: absolute;
     align-items: center;
     align-content: center;
-    bottom: 0px;
+    bottom: 0;
     left: 0;
     right: 0;
     height: 3rem;
