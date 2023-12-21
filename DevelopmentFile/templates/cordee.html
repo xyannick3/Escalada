@@ -4,21 +4,28 @@
 
 {%block content%}
 <h2> Voici la liste membres de la cordée {{cordee["nomcordee"]}} </h2>
-<table>
-    <thread>
-        <tr>
-            <th>{{cordee["nomcordee"]}}</th>
-        </tr>
-    </thread>
-    <tbody>
-        {%for item in content%}
+<div class="table_wrapper">
+    <table>
+        <thead>
             <tr>
-                <td>
-                    
-                    <a href={{url_for("user", select=item[0])}}>{{item[1]}}</a>
-                </td>
+                <th>{{cordee["nomcordee"]}}</th>
             </tr>
-        {%endfor%}
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            <tr>
+                <th colspan="2">
+                    <div class="separation_bar"></div>
+                </th>
+            </tr>
+            {%for item in content%}
+                <tr>
+                    <td>
+                        
+                        <a href={{url_for("user", select=item[0])}}>{{item[1]}}</a>
+                    </td>
+                </tr>
+            {%endfor%}
+        </tbody>
+    </table>
+</div>
 {%endblock%}

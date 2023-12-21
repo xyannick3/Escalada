@@ -12,7 +12,7 @@ le niveau de difficulté est <a href="{{url_for('difficulté',select=content["fr
 
 <div class="table_wrapper">
     <table>
-        <thread>
+        <thead>
             <tr>
                 <th>participants</th>
                 {%if session["mail"]==content["mail"]%}
@@ -20,7 +20,7 @@ le niveau de difficulté est <a href="{{url_for('difficulté',select=content["fr
                 {%endif%}
             </tr>
 
-        </thread>
+        </thead>
         <tbody>
             <tr>
                 <th colspan="2">

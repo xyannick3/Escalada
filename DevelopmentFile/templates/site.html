@@ -7,22 +7,29 @@
 
 {%block content%}
 <h2>Voici la liste des voies disponibles</h2>
-<table>
-    <thread>
-        <tr>
-            <th>nom</th>
-            <th>longueur de l'ascention</th>
-            <th><a>difficulté</th>
-        </tr>
-    </thread>
-    <tbody>
-        {% for item in content%}
+<div class="table_wrapper">
+    <table>
+        <thead>
             <tr>
-                <td><div onmouseout="this.style.backgroundColor='var(--background)'" onmouseover="this.style.backgroundColor='#e74c3c'"  onclick="location.href =  '{{url_for("voie", select=item["idv"])}}'">{{item["nom"]}}</div></td>
-                <td>{{item["longueur"]}}</td>
-                <td><div onmouseout="this.style.backgroundColor='var(--background)'" onmouseover="this.style.backgroundColor='#e74c3c'" onclick = "location.href='{{url_for("difficultés", select=item["fr"])}}';">{{item["fr"]}}</div></td>
+                <th>nom</th>
+                <th>longueur de l'ascention</th>
+                <th><a>difficulté</th>
             </tr>
-        {%endfor%}
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            <tr>
+                <th colspan="2">
+                    <div class="separation_bar"></div>
+                </th>
+            </tr>
+            {% for item in content%}
+                <tr>
+                    <td><div onmouseout="this.style.backgroundColor='var(--background)'" onmouseover="this.style.backgroundColor='#e74c3c'"  onclick="location.href =  '{{url_for("voie", select=item["idv"])}}'">{{item["nom"]}}</div></td>
+                    <td>{{item["longueur"]}}</td>
+                    <td><div onmouseout="this.style.backgroundColor='var(--background)'" onmouseover="this.style.backgroundColor='#e74c3c'" onclick = "location.href='{{url_for("difficultés", select=item["fr"])}}';">{{item["fr"]}}</div></td>
+                </tr>
+            {%endfor%}
+        </tbody>
+    </table>
+</div>
 {%endblock%}

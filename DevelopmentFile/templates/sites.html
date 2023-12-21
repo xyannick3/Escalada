@@ -7,21 +7,28 @@
 
 {%block content%}
 <h2>Voici la liste des sites disponibles</h2>
-<table>
-    <thread>
-        <tr>
-            <th>nom</th>
-            <th>codepostal</th>
-        </tr>
-    </thread>
-    <tbody>
-        {% for item in content%}
+<div class="table_wrapper">
+    <table>
+        <tread>
             <tr>
-                <td><a href={{url_for("site", select=item["idse"])}}>{{item["nom"]}}</a></td>
-                
-                <td><a href="https://www.google.com/maps/search/{{item["codepostal"]}}/" target="_blank">{{item["codepostal"]}}</td></a>
+                <th>nom</th>
+                <th>codepostal</th>
             </tr>
-        {%endfor%}
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            <tr>
+                <th colspan="2">
+                    <div class="separation_bar"></div>
+                </th>
+            </tr>
+            {% for item in content%}
+                <tr>
+                    <td><a href={{url_for("site", select=item["idse"])}}>{{item["nom"]}}</a></td>
+                    
+                    <td><a href="https://www.google.com/maps/search/{{item["codepostal"]}}/" target="_blank">{{item["codepostal"]}}</td></a>
+                </tr>
+            {%endfor%}
+        </tbody>
+    </table>
+</div>
 {%endblock%}

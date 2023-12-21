@@ -360,11 +360,13 @@ img.logo {
 }
 
 .table_wrapper > table > tbody > tr:nth-child(even) > td:first-child {
-    border-radius: 0.4rem 0 0 0.4rem;
+    border-top-left-radius: 0.4rem;
+    border-bottom-left-radius: 0.4rem;
 }
 
 .table_wrapper > table > tbody > tr:nth-child(even) > td:last-child {
-    border-radius: 0 0.4rem 0.4rem 0;
+    border-top-right-radius: 0.4rem;
+    border-bottom-right-radius: 0.4rem;
 }
 
 

@@ -4,21 +4,28 @@
 
 {%block content%}
 <h2> Voici la liste des cordées </h2>
-<table>
-    <thread>
-        <tr>
-            <th>Cordées</th>
-        </tr>
-    </thread>
-    <tbody>
-        {%for item in content%}
+<div class="table_wrapper">
+    <table>
+        <thead>
             <tr>
-                <td>
-                    
-                    <a href={{url_for("cordeeselect", select=item["idcordee"])}}>{{item["nomcordee"]}}</a>
-                </td>
+                <th>Cordées</th>
             </tr>
-        {%endfor%}
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            <tr>
+                <th colspan="2">
+                    <div class="separation_bar"></div>
+                </th>
+            </tr>
+            {%for item in content%}
+                <tr>
+                    <td>
+                        
+                        <a href={{url_for("cordeeselect", select=item["idcordee"])}}>{{item["nomcordee"]}}</a>
+                    </td>
+                </tr>
+            {%endfor%}
+        </tbody>
+    </table>
+</div>
 {%endblock%}
