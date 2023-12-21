@@ -10,24 +10,30 @@ L'élévénement aura lieu le {{content["datep"]}}<br>
 Il est organisé par {{content["mail"]}}<br>
 le niveau de difficulté est <a href="{{url_for('difficulté',select=content["fr"])}}">{{content["fr"]}}</a><br>
 
-<table>
-    <thread>
-        <tr>
-            <th>participants</th>
-            {%if session["mail"]==content["mail"]%}
-            <th>désinscrire</th>
-            {%endif%}
-        </tr>
+<div class="table_wrapper">
+    <table>
+        <thread>
+            <tr>
+                <th>participants</th>
+                {%if session["mail"]==content["mail"]%}
+                <th>désinscrire</th>
+                {%endif%}
+            </tr>
 
-    </thread>
+        </thread>
         <tbody>
+            <tr>
+                <th colspan="2">
+                    <div class="separation_bar"></div>
+                </th>
+            </tr>
             {% for elem in participant%}
                 <tr>
-                    <td><div onmouseout="this.style.backgroundColor='var(--background)'" onmouseover="this.style.backgroundColor='#e74c3c'"  onclick="location.href =  '{{url_for("user", select=elem["mail"])}}'"> {{elem["mail"]}}</div></td>
+                    <td><div onmouseout="this.style.backgroundColor='var({% if loop.index%2 == 0 %}--background-accent{% else %}--background{% endif %})'" onmouseover="this.style.backgroundColor='#e74c3c'"  onclick="location.href =  '{{url_for("user", select=elem["mail"])}}'"> {{elem["mail"]}}</div></td>
                     {%if session["mail"]==content["mail"]%}
                     <td>
                         <div 
-                        onmouseout="this.style.backgroundColor='var(--background)'" 
+                        onmouseout="this.style.backgroundColor='var({% if loop.index%2 == 0 %}--background-accent{% else %}--background{% endif %})'" 
                         onmouseover="this.style.backgroundColor='#e74c3c'"  
                         onclick="location.href='{{ url_for("remove", idpropo=content['idpropo'], email=elem['mail']) }}'">
                         x
@@ -37,7 +43,8 @@ le niveau de difficulté est <a href="{{url_for('difficulté',select=content["fr
                 </tr>
             {%endfor%}
         </tbody>
-</table>
+    </table>
+</div>
 
 {%if content['nb_max']>nbr%}
 

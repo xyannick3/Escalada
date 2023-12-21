@@ -7,32 +7,39 @@
 
 {%block content%}
 <h2>Voici la table des difficultés</h2>
-<table>
-    <thread>
-        <tr>
-            <th>Français</th>
-            <th>Americain</th>
-            <th>Anglais</th>
-        </tr>
-    </thread>
-    <tbody>
-        {% for item in content%}
-        {%if item["fr"]==select%} 
-        <script>window.onload = function(){(console.log('{{item}}'))}</script>
-        <tr style="background-color: yellow;">
-            <td>{{item["fr"]}}</td>
-            <td>{{item["am"]}}</td>
-            <td>{{item["en"]}}</td>
-        </tr>
-        
-        {%else%}
-        <tr>
-            <td>{{item["fr"]}}</td>
-            <td>{{item["am"]}}</td>
-            <td>{{item["en"]}}</td>
-        </tr>
-        {%endif%}
-            {%endfor%}
-    </tbody>
-</table>
+<div class="table_wrapper">
+    <table>
+        <thead>
+            <tr>
+                <th>Français</th>
+                <th>Americain</th>
+                <th>Anglais</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th colspan="3">
+                    <div class="separation_bar"></div>
+                </th>
+            </tr>
+            {% for item in content%}
+            {%if item["fr"]==select%} 
+            <script>window.onload = function(){(console.log('{{item}}'))}</script>
+            <tr style="background-color: yellow;">
+                <td>{{item["fr"]}}</td>
+                <td>{{item["am"]}}</td>
+                <td>{{item["en"]}}</td>
+            </tr>
+            
+            {%else%}
+            <tr>
+                <td>{{item["fr"]}}</td>
+                <td>{{item["am"]}}</td>
+                <td>{{item["en"]}}</td>
+            </tr>
+            {%endif%}
+                {%endfor%}
+        </tbody>
+    </table>
+</div>
 {%endblock%}

@@ -294,7 +294,7 @@ img.logo {
     box-shadow: 5px 5px 5px 0px #00000088;
 }
 
-#login_wrapper > form > .separation_bar {
+.separation_bar {
     position: relative;
     height: 0.3rem;
     width: 100%;
@@ -334,6 +334,37 @@ img.logo {
 #error_page_wrapper > p {
     position: relative;
     left: 25%;
+}
+
+.table_wrapper {
+    background-color: var(--background-accent);
+    width: fit-content;
+    padding: 1rem;
+    border-radius: 1rem;
+}
+
+.table_wrapper > table {
+    border: none;
+    border-collapse: collapse;
+    
+}
+
+.table_wrapper > table > tbody > tr > td {
+    padding-top: 0.25rem;
+    padding-right: 0.25rem;
+    padding-left: 0.25rem;
+}
+
+.table_wrapper > table > tbody > tr:nth-child(even) > td{
+    background-color: var(--background);
+}
+
+.table_wrapper > table > tbody > tr:nth-child(even) > td:first-child {
+    border-radius: 0.4rem 0 0 0.4rem;
+}
+
+.table_wrapper > table > tbody > tr:nth-child(even) > td:last-child {
+    border-radius: 0 0.4rem 0.4rem 0;
 }
 
 

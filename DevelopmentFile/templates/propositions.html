@@ -6,35 +6,42 @@
 {%endblock%}
 {%block content%}
 <h2>Voici la liste des propositions </h2>
-<table>
-    <thread>
-        <tr>
-            <th>description</th>
-            <th>date</th>
-            <th>Organisateur</th>
-            <th>difficulté</th>
-            <th>lieu</th>
-            <th>disponibilité</th>
-            <th>accès</th>
-        </tr>
-
-    </thread>
-    <tbody>
-        {% for i in range(length)%}
+<div class="table_wrapper">
+    <table>
+        <thead>
             <tr>
-                <td>{{content[i]["description"]}}</td>
-                <td>{{content[i]["datep"]}}</td>
-                <td><div onmouseout="this.style.backgroundColor='var(--background)'" onmouseover="this.style.backgroundColor='#e74c3c'"  onclick="location.href =  '{{url_for("user", select=content[i]["mail"])}}'">{{content[i]["mail"]}}</div></td>
-                <td><div onmouseout="this.style.backgroundColor='var(--background)'" onmouseover="this.style.backgroundColor='#e74c3c'"  onclick="location.href =  '{{url_for("difficulté", select=content[i]["fr"])}}'">{{content[i]["fr"]}}</div></td>
-                <td><div onmouseout="this.style.backgroundColor='var(--background)'" onmouseover="this.style.backgroundColor='#e74c3c'"  onclick="location.href =  '{{url_for("user", select=content[i]["mail"])}}'">{{content[i]["mail"]}}</div></td>
-                <td><div onmouseout="this.style.backgroundColor='var(--background)'" onmouseover="this.style.backgroundColor='#e74c3c'" onclick = "location.href='{{url_for("site", select=content[i]["idse"])}}';">{{nom[i]["nom"]}}</div></td>
-                <td>{{nbr[i]}}/{{content[i]['nb_max']}}</td>
-                <td><div onmouseout="this.style.backgroundColor='var(--background)'" onmouseover="this.style.backgroundColor='#e74c3c'" onclick = "location.href='{{url_for("proposition", select=content[i]["idpropo"])}}';">ici!</div></td>
-
+                <th>description</th>
+                <th>date</th>
+                <th>Organisateur</th>
+                <th>difficulté</th>
+                <th>lieu</th>
+                <th>disponibilité</th>
+                <th>accès</th>
             </tr>
-        {%endfor%}
-    </tbody>
-</table>
+
+        </thead>
+        <tbody>
+            <tr>
+                <th colspan="8">
+                    <div class="separation_bar"></div>
+                </th>
+            </tr>
+            {% for i in range(length)%}
+                <tr>
+                    <td>{{content[i]["description"]}}</td>
+                    <td>{{content[i]["datep"]}}</td>
+                    <td><div onmouseout="this.style.backgroundColor='var({% if i%2 == 0 %}--background{% else %}--background-accent{% endif %})'" onmouseover="this.style.backgroundColor='#e74c3c'"  onclick="location.href =  '{{url_for("user", select=content[i]["mail"])}}'">{{content[i]["mail"]}}</div></td>
+                    <td><div onmouseout="this.style.backgroundColor='var({% if i%2 == 0 %}--background{% else %}--background-accent{% endif %})'" onmouseover="this.style.backgroundColor='#e74c3c'"  onclick="location.href =  '{{url_for("difficulté", select=content[i]["fr"])}}'">{{content[i]["fr"]}}</div></td>
+                    <td><div onmouseout="this.style.backgroundColor='var({% if i%2 == 0 %}--background{% else %}--background-accent{% endif %})'" onmouseover="this.style.backgroundColor='#e74c3c'"  onclick="location.href =  '{{url_for("user", select=content[i]["mail"])}}'">{{content[i]["mail"]}}</div></td>
+                    <td><div onmouseout="this.style.backgroundColor='var({% if i%2 == 0 %}--background{% else %}--background-accent{% endif %})'" onmouseover="this.style.backgroundColor='#e74c3c'" onclick = "location.href='{{url_for("site", select=content[i]["idse"])}}';">{{nom[i]["nom"]}}</div></td>
+                    <td>{{nbr[i]}}/{{content[i]['nb_max']}}</td>
+                    <td><div onmouseout="this.style.backgroundColor='var({% if i%2 == 0 %}--background{% else %}--background-accent{% endif %})'" onmouseover="this.style.backgroundColor='#e74c3c'" onclick = "location.href='{{url_for("proposition", select=content[i]["idpropo"])}}';">ici!</div></td>
+
+                </tr>
+            {%endfor%}
+        </tbody>
+    </table>
+</div>
 {%if estguide%}
 <p>vous êtes un guide, si vous souhaitez créer une proposition cliquez <a href="{{url_for('create_propo')}}">ici</a></p>
 {%endif%}
