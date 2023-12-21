@@ -25,7 +25,7 @@
             {% for item in content%}
             {%if item["fr"]==select%} 
             <script>window.onload = function(){(console.log('{{item}}'))}</script>
-            <tr style="background-color: yellow;">
+            <tr class="selected">
                 <td>{{item["fr"]}}</td>
                 <td>{{item["am"]}}</td>
                 <td>{{item["en"]}}</td>

@@ -359,12 +359,16 @@ img.logo {
     background-color: var(--background);
 }
 
-.table_wrapper > table > tbody > tr:nth-child(even) > td:first-child {
+.table_wrapper > table > tbody > tr.selected > td{
+    background-color: yellow;
+}
+
+.table_wrapper > table > tbody > tr > td:first-child {
     border-top-left-radius: 0.4rem;
     border-bottom-left-radius: 0.4rem;
 }
 
-.table_wrapper > table > tbody > tr:nth-child(even) > td:last-child {
+.table_wrapper > table > tbody > tr > td:last-child {
     border-top-right-radius: 0.4rem;
     border-bottom-right-radius: 0.4rem;
 }

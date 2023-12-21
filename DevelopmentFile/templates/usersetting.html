@@ -4,7 +4,7 @@
 
 {%block content%}
 <form action="#" method="post">
-    <p>Inscrivez-vous</p>
+    <p>Vous pouvez modifiez vos informations ci-dessous.</p>
     <p><input value="{{content['nom']}}" type="text" id="nom"name="nom" placeholder="Nom de l'utilisateur"></p>
     <p><input value="{{content['prenom']}}" type="text" id="prenom"name="prenom" placeholder="prenom de l'utilisateur"></p>
     <p><input value="{{content['mail']}}" type="text" id="id"name="id" placeholder="Email"></p>
@@ -17,6 +17,6 @@
     <p>Réentrez votre mdp où modifiez le.</p>
     <p><input type="password" id="psw1" name="psw1" class= "form-control" placeholder="Mot De Passe"></p>
     <p><input type="password" id="psw2" name="psw2" class= "form-control" placeholder="Confirmez Mot De Passe"></p>
-    <div><button class="btn btn-primary" type= "submit">S'inscrire</button></div>
+    <div><button class="btn btn-primary" type= "submit">Enregistrer</button></div>
 </form>
 {%endblock%}

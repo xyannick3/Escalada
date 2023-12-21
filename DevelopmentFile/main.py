@@ -120,7 +120,7 @@ def register() :
               (psw2 is None)) :
             flash('veuillez remplir les valeurs')
             print(nom,prenom,email,psw1,psw2,fr)
-        elif psw1!=psw2 : 
+        elif psw1!=psw2 :
             flash('Les mots de passes ne sont pas les même', category='error')
             print(3)
         elif (len(nom)>25 or len(nom)<2) :
