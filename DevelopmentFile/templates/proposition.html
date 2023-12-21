@@ -46,8 +46,12 @@ le niveau de difficulté est <a href="{{url_for('difficulté',select=content["fr
     </table>
 </div>
 
-{%if content['nb_max']>nbr%}
+{%if session['mail']==content['mail']%}
+<br>souhaitez-vous <a href="{{url_for('transfer',select=content['idpropo'])}}">archiver</a> cet proposition?<br>
+souhaitez vous supprimer cet proposition?<br>
+{%endif%}
 
+{%if content['nb_max']>nbr%}
 Souhaitez vous rejoindre cette partie? cliquez<a href="{{url_for('join',select=content['idpropo'])}}"> ici </a>et contactez l'organisateur pour réserver votre place
 {%endif%}
 </p>

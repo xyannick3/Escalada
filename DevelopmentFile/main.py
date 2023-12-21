@@ -120,7 +120,7 @@ def register() :
               (psw2 is None)) :
             flash('veuillez remplir les valeurs')
             print(nom,prenom,email,psw1,psw2,fr)
-        elif psw1!=psw2 :
+        elif psw1!=psw2 : 
             flash('Les mots de passes ne sont pas les même', category='error')
             print(3)
         elif (len(nom)>25 or len(nom)<2) :
@@ -429,8 +429,6 @@ def proposition(select) :
     """
     ici on a l'affichage de la proposition
     """
-    session['mail']='leroux.leo32@yahoo.fr'
-    print(session['mail'])
     if 'mail' not in session :
         return redirect('login')
     with db.connect() as conn :
@@ -521,7 +519,7 @@ def create_propo() :
         nb_max=request.form.get('nb_max')
         diff=request.form.get('difficulte')
         with db.connect() as conn : 
-            with conn.cursor(cursor_factory=psycopg2.extras.NamedTupleCursor) as cur : 
+            with conn.cursor(cursor_factory=psycopg2.extras.NamedTupleCursor) as cur :
                 cur.execute('insert into proposition (description,datep,nb_max,mail,fr,idse) values(%s,%s,%s,%s,%s,%s);',
                             (description,date,nb_max,session['mail'],diff,sit,))
             conn.commit()
@@ -541,9 +539,48 @@ def transfer(select):
     """
     Cette fonction assurera le transfert des données vers le menu cordée
     """
-    if 'mail' not in session : 
+    if 'mail' not in session :
         return redirect('login')
+    if request.method=='GET' :
+        with db.connect() as conn :
+            with conn.cursor(cursor_factory=psycopg2.extras.NamedTupleCursor) as cur :
+                cur.execute('select * from typeesca;')
+                typesca=cur.fetchall()
+                cur.execute('select * from proposition where idpropo=%s;',(select,))
+                propo=cur.fetchall()
+                propo=propo[0]
+                cur.execute('select * from voie where idse=%s;',(propo[5],))
+                v=cur.fetchall()
+        return render_template('transfer.html',typesca=typesca,v=v)
+    if request.method=='POST' :
+        nom=request.form.get('nomcordee')
+        v=request.form.get('voie')
+        typeesca=request.form.get('typeesca')
+        with db.connect() as conn :
+            with conn.cursor(cursor_factory=psycopg2.extras.NamedTupleCursor) as cur :
+                cur.execute('select * from proposition where idpropo=%s;',(select,))
+                propo=cur.fetchall()
+                propo=propo[0]
+                cur.execute('select * from participe where idpropo=%s;',(select,))
+                membres=cur.fetchall()
+                cur.execute('insert into cordee (nomcordee) VALUES (%s) RETURNING idcordee;',(nom,))
+                newid=cur.fetchall()
+                newid=newid[0]
+                for item in membres :
+                    cur.execute('insert into partiec (idcordee,mail) VALUES (%s,%s);',
+                                (newid[0],item[0]))
+                cur.execute("insert into grimper (idte,idcordee,idv,dateg) VALUES (%s,%s,%s,%s);",
+                            (typeesca,newid,v,propo[2]))
+                cur.execute('delete from participe where idpropo=%s;',(select,))
+                cur.execute("delete from proposition where idpropo=%s;",(select,))
+                conn.commit()
+        return redirect(url_for('cordees'))
+            
+
+    
+
+        
 
 
 if __name__ == "__main__" :
-    app.run()
+    app.run() 
