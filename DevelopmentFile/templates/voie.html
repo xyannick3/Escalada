@@ -9,4 +9,54 @@
     <a href="https://www.google.com/maps/search/{{site[2]}}/" target="_blank">{{site['codepostal']}}</a>
     , et de type {{typ["nom"]}}.
 </p>
+
+
+<div class="table_wrapper">
+    <table>
+        <thead>
+            <tr>
+                <th>debouche vers</th>
+            </tr>
+
+        </thead>
+        <tbody>
+            <tr>
+                <th colspan="8">
+                    <div class="separation_bar"></div>
+                </th>
+            </tr>
+            {% for i in range(longueurs)%}
+                <tr>
+                    <td><div onmouseout="this.style.backgroundColor='var({% if i%2 == 0 %}--background{% else %}--background-accent{% endif %})'" onmouseover="this.style.backgroundColor='#e74c3c'"  onclick="location.href =  '{{url_for("voie", select=suivant[i]['idv2'])}}'">{{namesuivant[i]["nom"]}}</div></td>
+                </tr>
+            {%endfor%}
+        </tbody>
+    </table>
+</div>
+<br>
+
+    <div class="table_wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>précédé par</th>
+                </tr>
+    
+            </thead>
+            <tbody>
+                <tr>
+                    <th colspan="8">
+                        <div class="separation_bar"></div>
+                    </th>
+                </tr>
+                {% for i in range(longueurp)%}
+                    <tr>
+                        <td>{{content[i]["description"]}}</td>
+                        <td>{{content[i]["datep"]}}</td>
+                        <td><div onmouseout="this.style.backgroundColor='var({% if i%2 == 0 %}--background{% else %}--background-accent{% endif %})'" onmouseover="this.style.backgroundColor='#e74c3c'"  onclick="location.href =  '{{url_for("voie", select=precedent[i]['idv1'])}}'">{{nameprecedent[i]["nom"]}}</div></td>
+                    </tr>
+                {%endfor%}
+            </tbody>
+        </table>
+    </div>
 {%endblock%}

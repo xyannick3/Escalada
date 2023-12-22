@@ -388,7 +388,24 @@ def voie(select):
             ville=cur.fetchall()
             cur.execute("select * from typevoie where idtv=%s;",(res[0][3],))
             typ=cur.fetchall()
-    return render_template('voie.html', content=res,site=sit[0],ville=ville[0],typ=typ[0])
+            cur.execute("select * from debouchevers where idv1=%s;",(select,))
+            suivant=cur.fetchall()
+            namesuivant=[]
+            for elem in suivant :
+                cur.execute("select * from voie where idv=%s;",(elem[1],))
+                namesuivant=cur.fetchall()
+            cur.execute("select * from debouchevers where idv2=%s;",(select,))
+            precedent=cur.fetchall()
+            longueurs=len(suivant)
+            longueurp=len(precedent)
+            nameprecedent=[]
+            for elem in precedent :
+                cur.execute("select * from voie where idv=%s;",(elem[0],))
+                nameprecedent=cur.fetchall()
+    return render_template('voie.html', content=res,site=sit[0],ville=ville[0],typ=typ[0],
+                           suivant=suivant,namesuivant=namesuivant,precedent=precedent,
+                           nameprecedent=nameprecedent,longueurs=longueurs,
+                           longueurp=longueurp)
 
 
 @app.route("/propositions")
