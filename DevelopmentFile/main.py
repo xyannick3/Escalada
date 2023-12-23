@@ -86,10 +86,14 @@ def site(select) :
     with db.connect() as conn:
         with conn.cursor(cursor_factory=psycopg2.extras.NamedTupleCursor) as cur :
             cur.execute(
+                " select distinct mail from siteesca, estguidede where siteesca.codepostal=estguidede.codepostal and idse=%s;",
+            (select,))
+            guides=cur.fetchall()
+            cur.execute(
                 "select voie.idv, voie.nom, voie.longueur, voie.fr from siteesca, voie where (siteesca.idse = voie.idse) AND (siteesca.idse=%s);"
                 ,(select,))
             result=cur.fetchall()
-    return render_template("site.html",content=result,ses=session)
+    return render_template("site.html",content=result,ses=session,guides=guides)
 
 
 @app.route("/register",methods=["GET","POST"])
@@ -592,12 +596,6 @@ def transfer(select):
                 cur.execute("delete from proposition where idpropo=%s;",(select,))
                 conn.commit()
         return redirect(url_for('cordees'))
-            
-
-    
-
-        
-
 
 if __name__ == "__main__" :
     app.run() 

@@ -21,18 +21,18 @@
                     <div class="separation_bar"></div>
                 </th>
             </tr>
-            {%set i=0%}
             {% for item in content%}
             
                 <tr>
-                    <td><div onmouseout="this.style.backgroundColor='var({% if i%2 == 0 %}--background{% else %}--background-accent{% endif %})'" onmouseover="this.style.backgroundColor='#e74c3c'"  onclick="location.href =  '{{url_for("site", select=item["idse"])}}'">{{item["nom"]}}</div></td>
+                    <td><div onmouseout="this.style.backgroundColor='var({% if loop.index%2 != 0 %}--background{% else %}--background-accent{% endif %})'" onmouseover="this.style.backgroundColor='#e74c3c'"  onclick="location.href =  '{{url_for("site", select=item["idse"])}}'">{{item["nom"]}}</div></td>
                     <!--<td><a href={{url_for("site", select=item["idse"])}}>{{item["nom"]}}</a></td>-->
-                    <td><div onmouseout="this.style.backgroundColor='var({% if i%2 == 0 %}--background{% else %}--background-accent{% endif %})'" onmouseover="this.style.backgroundColor='#e74c3c'"  onclick="location.href =  "https://www.google.com/maps/search/{{item["codepostal"]}}/" target="_blank">{{item["codepostal"]}}</div></td>
+                    <td><div onmouseout="this.style.backgroundColor='var({% if loop.index%2 != 0 %}--background{% else %}--background-accent{% endif %})'" onmouseover="this.style.backgroundColor='#e74c3c'"  onclick="location.href =  'https://www.google.com/maps/search/{{item["codepostal"]}}/'" target="_blank">{{item["codepostal"]}}</div></td>
                     <!--<td><a href="https://www.google.com/maps/search/{{item["codepostal"]}}/" target="_blank">{{item["codepostal"]}}</td></a>-->
                 </tr>
-            {%set i=i+1%}
             {%endfor%}
         </tbody>
     </table>
 </div>
+
+
 {%endblock%}

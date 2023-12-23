@@ -17,12 +17,10 @@
                     <div class="separation_bar"></div>
                 </th>
             </tr>
-            {%set i=0%}
             {%for item in content%}
                 <tr>
-                    <td><div onmouseout="this.style.backgroundColor='var({% if i%2 == 0 %}--background{% else %}--background-accent{% endif %})'" onmouseover="this.style.backgroundColor='#e74c3c'"  onclick="location.href =  '{{url_for("cordeeselect", select=item["idcordee"])}}'">{{item["nomcordee"]}}</div></td>
+                    <td><div onmouseout="this.style.backgroundColor='var({% if loop.index%2 != 0 %}--background{% else %}--background-accent{% endif %})'" onmouseover="this.style.backgroundColor='#e74c3c'"  onclick="location.href =  '{{url_for("cordeeselect", select=item["idcordee"])}}'">{{item["nomcordee"]}}</div></td>
                 </tr>
-            {%set i=i+1%}
             {%endfor%}
         </tbody>
     </table>
