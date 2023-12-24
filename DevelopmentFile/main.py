@@ -570,7 +570,7 @@ def transfer(select):
                 cur.execute('select * from proposition where idpropo=%s;',(select,))
                 propo=cur.fetchall()
                 propo=propo[0]
-                cur.execute('select * from voie where idse=%s;',(propo[5],))
+                cur.execute('select * from voie where idse=%s;',(propo[6],))
                 v=cur.fetchall()
         return render_template('transfer.html',typesca=typesca,v=v)
     if request.method=='POST' :
